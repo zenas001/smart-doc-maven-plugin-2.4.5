@@ -22,6 +22,11 @@ public class ApiExtendConfig extends ApiConfig {
      */
     private boolean zipDoc;
 
+    /**
+     * feishuPath
+     */
+    private String feishuPath;
+
 
     /**
      * controller controller
@@ -58,5 +63,13 @@ public class ApiExtendConfig extends ApiConfig {
 
     public void setZipDoc(boolean zipDoc) {
         this.zipDoc = zipDoc;
+    }
+
+    public String getFeishuPath() {
+        return feishuPath;
+    }
+
+    public void setFeishuPath(String feishuPath) {
+        this.feishuPath = feishuPath;
     }
 }

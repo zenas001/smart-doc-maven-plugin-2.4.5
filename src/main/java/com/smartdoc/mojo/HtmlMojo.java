@@ -25,7 +25,6 @@ package com.smartdoc.mojo;
 
 import cn.hutool.core.util.ZipUtil;
 import com.power.doc.builder.HtmlApiDocBuilder;
-import com.power.doc.model.ApiConfig;
 import com.smartdoc.constant.MojoConstants;
 import com.smartdoc.extend.ApiExtendConfig;
 import com.thoughtworks.qdox.JavaProjectBuilder;
