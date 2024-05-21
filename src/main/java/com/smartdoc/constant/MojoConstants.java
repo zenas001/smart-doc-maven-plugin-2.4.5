@@ -48,4 +48,6 @@ public interface MojoConstants {
     String TORNA_RPC_MOJO = "torna-rpc";
     //add
     String API_IMPORT = "api-import";
+    //word doc
+    String WORD_DOC="word-doc";
 }

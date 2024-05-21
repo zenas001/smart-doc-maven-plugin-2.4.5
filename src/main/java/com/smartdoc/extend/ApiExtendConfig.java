@@ -16,18 +16,6 @@ public class ApiExtendConfig extends ApiConfig {
      * importEnvFile
      */
     private String importEnvFile;
-/************************ doc config****************************/
-    /**
-     * zip Doc
-     */
-    private boolean zipDoc;
-
-    /**
-     * feishuPath
-     */
-    private String feishuPath;
-
-
     /**
      * controller controller
      */
@@ -57,19 +45,4 @@ public class ApiExtendConfig extends ApiConfig {
         this.importEnvFile = importEnvFile;
     }
 
-    public boolean isZipDoc() {
-        return zipDoc;
-    }
-
-    public void setZipDoc(boolean zipDoc) {
-        this.zipDoc = zipDoc;
-    }
-
-    public String getFeishuPath() {
-        return feishuPath;
-    }
-
-    public void setFeishuPath(String feishuPath) {
-        this.feishuPath = feishuPath;
-    }
 }
