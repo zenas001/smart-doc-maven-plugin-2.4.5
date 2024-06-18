@@ -47,10 +47,6 @@ public class HtmlMojo extends BaseDocsGeneratorMojo {
     public void executeMojo(ApiExtendConfig apiConfig, JavaProjectBuilder javaProjectBuilder) throws MojoExecutionException, MojoFailureException {
         try {
             HtmlApiDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
-            //zip
-            if(apiConfig.isZipDoc()&&apiConfig.getOutPath()!=null){
-                ZipUtil.zip(apiConfig.getOutPath());
-            }
         } catch (Exception e) {
             getLog().error(e);
         }

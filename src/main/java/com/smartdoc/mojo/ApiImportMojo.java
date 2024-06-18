@@ -26,34 +26,26 @@ package com.smartdoc.mojo;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.net.url.UrlBuilder;
-import cn.hutool.core.text.StrPool;
 import cn.hutool.http.HttpException;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONUtil;
-import com.power.common.util.StringUtil;
 import com.power.doc.builder.ProjectDocConfigBuilder;
-import com.power.doc.constants.DocAnnotationConstants;
-import com.power.doc.constants.DocGlobalConstants;
 import com.power.doc.factory.BuildTemplateFactory;
 import com.power.doc.model.ApiDoc;
-import com.power.doc.model.ApiMethodDoc;
 import com.power.doc.template.IDocBuildTemplate;
-import com.power.doc.utils.DocUtil;
 import com.power.doc.utils.JsonUtil;
 import com.smartdoc.constant.MojoConstants;
 import com.smartdoc.extend.ApiExtendConfig;
 import com.smartdoc.extend.ApiImport;
-import com.smartdoc.extend.ApiImportEnv;
-import com.smartdoc.extend.ApiParam;
+import com.smartdoc.extend.ApiInfo;
 import com.smartdoc.extend.AuthInfo;
 import com.smartdoc.extend.Env;
-import com.smartdoc.util.MojoUtils;
+import com.smartdoc.util.ExtendUtils;
 import com.thoughtworks.qdox.JavaProjectBuilder;
-import com.thoughtworks.qdox.model.JavaAnnotation;
 import com.thoughtworks.qdox.model.JavaClass;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Execute;
@@ -63,7 +55,6 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -91,10 +82,6 @@ public class ApiImportMojo extends BaseDocsGeneratorMojo {
      */
     private static final String HEADER_TOKEN_PREFIX = "Bearer ";
 
-    /**
-     * all of
-     */
-    private static final String ALL = "*";
 
     /**
      * auth headers
@@ -108,19 +95,12 @@ public class ApiImportMojo extends BaseDocsGeneratorMojo {
 
 
     @Override
-    public void execute() throws MojoExecutionException, MojoFailureException {
-        //flag
-        super.isApiCreate = Boolean.TRUE;
-        super.execute();
-    }
-
-    @Override
     public void executeMojo(ApiExtendConfig apiConfig, JavaProjectBuilder javaProjectBuilder) throws MojoExecutionException, MojoFailureException {
         ProjectDocConfigBuilder configBuilder = new ProjectDocConfigBuilder(apiConfig, javaProjectBuilder);
         IDocBuildTemplate<ApiDoc> docBuildTemplate = BuildTemplateFactory.getDocBuildTemplate("spring");
-        List<ApiImport> controllers = getApiParamList(apiConfig);
+        List<ApiImport> controllers = ExtendUtils.getTargetApiList(apiConfig);
         if (controllers != null && !controllers.isEmpty()) {
-            List<ApiParam> apiParamList = new ArrayList<>();
+            List<ApiInfo> apiInfoList = new ArrayList<>();
             //get call remote api auth params
             //controllerMap
             Map<String, ApiImport> controllerMap = controllers.stream().collect(Collectors.toMap(ApiImport::getController, Function.identity()));
@@ -132,17 +112,18 @@ public class ApiImportMojo extends BaseDocsGeneratorMojo {
                     configBuilder.getJavaProjectBuilder().getClasses().stream()
                             .filter(javaClass -> javaClass.getName().contains("Controller"))
                             .collect(Collectors.toMap(JavaClass::getName, Function.identity()));
-            controllerMap.forEach((name, apiImport) -> apiParamList.addAll(getApiParetamList(apiImport, apiDocMap.get(name), apiClassMap.get(name))));
-            log.info("api info:{}", JsonUtil.toPrettyJson(apiParamList));
-            if (CollUtil.isEmpty(apiParamList)) {
+            controllerMap.forEach((name, apiImport) -> apiInfoList.addAll(ExtendUtils.getApiParetamList(apiImport, apiDocMap.get(name),
+                    apiClassMap.get(name))));
+            log.info("api info:{}", JsonUtil.toPrettyJson(apiInfoList));
+            if (CollUtil.isEmpty(apiInfoList)) {
                 throw new MojoExecutionException("apiList is empty!");
             }
             //get env api
-            Env env = getEnv(apiConfig);
+            Env env = ExtendUtils.getEnv(apiConfig);
             //do upload to api auth center service
             String token = getToken(env);
             //create api auth
-            importToaAuthCenter(env, token, apiParamList);
+            importToaAuthCenter(env, token, apiInfoList);
         }
 
     }
@@ -166,30 +147,16 @@ public class ApiImportMojo extends BaseDocsGeneratorMojo {
         return authInfo.getAccessToken();
     }
 
-    private Env getEnv(ApiExtendConfig apiConfig) {
-        //get env config file
-        String importEnvFile = apiConfig.getImportEnvFile();
-        if (StringUtils.isAllBlank(importEnvFile)) {
-            throw new NullPointerException("importEnvFile  Path is null!");
-        }
-        File file = new File(importEnvFile);
-        if (!file.exists()) {
-            throw new NullPointerException("importEnvFile not found!");
-        }
-        ApiImportEnv apiImportEnv = MojoUtils.buildEnvFile(file);
-        return apiImportEnv.getEnv(apiConfig.getImportEnv());
-    }
-
-    private void importToaAuthCenter(Env env, String token, List<ApiParam> apiParamList) {
+    private void importToaAuthCenter(Env env, String token, List<ApiInfo> apiInfoList) {
         String authCenterApi = UrlBuilder.ofHttp(env.getHost() + env.getAuthUserApi() + "/api/create").build();
         Map<String, String> headers = new HashMap<>();
         headers.put(HEADER_KEY, HEADER_TOKEN_PREFIX.concat(token));
         HttpRequest httpRequest = HttpUtil.createPost(authCenterApi).addHeaders(headers);
         log.info("env => {}", JsonUtil.toPrettyJson(env));
-        for (ApiParam apiParam : apiParamList) {
-            String body = JsonUtil.toPrettyJson(apiParam);
+        for (ApiInfo apiInfo : apiInfoList) {
+            String body = JsonUtil.toPrettyJson(apiInfo);
             log.info("body data => {}", body);
-            httpRequest.body(JSONUtil.toJsonStr(apiParam));
+            httpRequest.body(JSONUtil.toJsonStr(apiInfo));
             try {
                 HttpResponse response = httpRequest.execute().sync();
                 if (response.isOk()) {
@@ -204,77 +171,4 @@ public class ApiImportMojo extends BaseDocsGeneratorMojo {
         log.info("headers => {}", httpRequest.headers());
         log.info("authCenterApi => {}", authCenterApi);
     }
-
-
-    private List<ApiParam> getApiParetamList(ApiImport apiImport, ApiDoc apiDoc, JavaClass javaClass) {
-        List<ApiParam> apiParamList = new ArrayList<>();
-        Map<String, ApiMethodDoc> methodDocMap = apiDoc.getList().stream().collect(Collectors.toMap(ApiMethodDoc::getName, Function.identity()));
-        //get controller url
-        String module = getModule(javaClass);
-        String methods = apiImport.getMethods();
-        if (StringUtils.isNotBlank(methods)) {
-            if (methods.equals(ALL)) {
-                for (Map.Entry<String, ApiMethodDoc> stringApiMethodDocEntry : methodDocMap.entrySet()) {
-                    apiParamList.add(generateApiParam(apiImport, apiDoc, stringApiMethodDocEntry.getValue(), module));
-                }
-            } else if (methods.contains(StrPool.COMMA)) {
-                String[] methodArray = methods.split(StrPool.COMMA);
-                for (String method : methodArray) {
-                    //get methodDoc
-                    ApiMethodDoc apiMethodDoc = methodDocMap.get(method);
-                    if (apiMethodDoc != null) {
-                        apiParamList.add(generateApiParam(apiImport, apiDoc, apiMethodDoc, module));
-                    }
-                }
-            } else {
-                //get methodDoc
-                ApiMethodDoc apiMethodDoc = methodDocMap.get(methods);
-                if (apiMethodDoc != null) {
-                    apiParamList.add(generateApiParam(apiImport, apiDoc, apiMethodDoc, module));
-                }
-            }
-        }
-        return apiParamList;
-    }
-
-    /**
-     * get controller base url mapping to auth module name
-     **/
-    private String getModule(JavaClass javaClass) {
-        //D:/maven-lib/com/github/shalousun/smart-doc/2.4.5/smart-doc-2.4.5-sources.jar!/com/power/doc/template/SpringBootDocBuildTemplate.java:196
-        for (JavaAnnotation annotation : javaClass.getAnnotations()) {
-            String annotationName = annotation.getType().getValue();
-            if (DocAnnotationConstants.REQUEST_MAPPING.equals(annotationName) ||
-                    DocGlobalConstants.REQUEST_MAPPING_FULLY.equals(annotationName)) {
-                return StringUtil.removeQuotes(DocUtil.getRequestMappingUrl(annotation));
-            }
-        }
-        return null;
-    }
-
-    /**
-     * generate auth center auth api parameter
-     **/
-    private static ApiParam generateApiParam(ApiImport apiImport, ApiDoc apiDoc, ApiMethodDoc apiMethodDoc, String module) {
-        ApiParam apiParam = new ApiParam(prePath(apiImport.getPrefix()), apiImport.getAppCode(), apiImport.getServiceName(),
-                apiImport.getVersion(),
-                1);
-        apiParam.setAuthor(StringUtils.isNotBlank(apiImport.getAuthor()) ? apiImport.getAuthor() : apiDoc.getAuthor());
-        apiParam.setModule(module);
-        apiParam.setRemark(apiDoc.getDesc().concat(apiMethodDoc.getDesc()));
-        apiParam.setName(apiMethodDoc.getDesc());
-        apiParam.setMethod(apiMethodDoc.getType());
-        apiParam.setPath(prePath(apiMethodDoc.getPath()));
-        return apiParam;
-    }
-
-
-    private static String prePath(String url) {
-        return url.endsWith("/") ? url.substring(0, url.lastIndexOf("/")) : url;
-    }
-
-    private List<ApiImport> getApiParamList(ApiExtendConfig apiConfig) {
-        return apiConfig.getImportControllers();
-    }
-
 }

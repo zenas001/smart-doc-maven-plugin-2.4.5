@@ -1,17 +1,45 @@
 package com.smartdoc.extend;
 
+import com.power.doc.model.ApiParam;
+
+import java.util.List;
+
 /**
  *
  **/
-public class ApiParam {
+public class ApiInfo {
+    private String serviceCode = "B02";
+    /**
+     * http method
+     */
     private String method;
-    private String serviceCode="B02";
     private String prefix;
     private String author;
     private String module;
+    private String serviceName;
+    private String serviceRemark;
+    private String methodName;
+    private String methodRemark;
+    /**
+     * path params
+     */
+    private List<ApiParam> pathParams;
+
+    /**
+     * query params
+     */
+    private List<ApiParam> queryParams;
+
+    /**
+     * http request params
+     */
+    private List<ApiParam> requestParams;
+    /**
+     * http response params
+     */
+    private List<ApiParam> responseParams;
     private String remark;
     private String appCode;
-    private String serviceName;
     private String version;
     private String path;
     private int disableFlag;
@@ -20,20 +48,12 @@ public class ApiParam {
     private int authType = 1;
 
 
-    public ApiParam(String prefix, String appCode, String serviceName, String version, int authType) {
+    public ApiInfo(String prefix, String appCode, String serviceName, String version, int authType) {
         this.prefix = prefix;
         this.appCode = appCode;
         this.serviceName = serviceName;
         this.version = version;
         this.authType = authType;
-    }
-
-    public String getMethod() {
-        return method;
-    }
-
-    public void setMethod(String method) {
-        this.method = method;
     }
 
     public String getServiceCode() {
@@ -68,12 +88,25 @@ public class ApiParam {
         this.module = module;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getServiceRemark() {
+
+        return serviceRemark;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setServiceRemark(String serviceRemark) {
+        this.serviceRemark = serviceRemark;
+    }
+
+    public String getMethodRemark() {
+        return methodRemark;
+    }
+
+    public String getRemark() {
+        return serviceRemark + methodRemark;
+    }
+
+    public void setMethodRemark(String methodRemark) {
+        this.methodRemark = methodRemark;
     }
 
     public String getAppCode() {
@@ -140,4 +173,55 @@ public class ApiParam {
         this.authType = authType;
     }
 
+    public String getMethodName() {
+        return methodName;
+    }
+
+    public void setMethodName(String methodName) {
+        this.methodName = methodName;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public List<ApiParam> getPathParams() {
+        return pathParams;
+    }
+
+    public void setPathParams(List<ApiParam> pathParams) {
+        this.pathParams = pathParams;
+    }
+
+    public List<ApiParam> getQueryParams() {
+        return queryParams;
+    }
+
+    public void setQueryParams(List<ApiParam> queryParams) {
+        this.queryParams = queryParams;
+    }
+
+    public List<ApiParam> getRequestParams() {
+        return requestParams;
+    }
+
+    public void setRequestParams(List<ApiParam> requestParams) {
+        this.requestParams = requestParams;
+    }
+
+    public List<ApiParam> getResponseParams() {
+        return responseParams;
+    }
+
+    public void setResponseParams(List<ApiParam> responseParams) {
+        this.responseParams = responseParams;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
 }

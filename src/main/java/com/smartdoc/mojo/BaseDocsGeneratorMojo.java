@@ -22,14 +22,12 @@
  */
 package com.smartdoc.mojo;
 
-import cn.hutool.json.JSONUtil;
 import com.power.common.constants.Charset;
 import com.power.common.util.CollectionUtil;
 import com.power.common.util.DateTimeUtil;
 import com.power.common.util.RegexUtil;
 import com.power.common.util.StringUtil;
 import com.power.doc.helper.JavaProjectBuilderHelper;
-import com.power.doc.model.ApiConfig;
 import com.smartdoc.constant.GlobalConstants;
 import com.smartdoc.constant.MojoConstants;
 import com.smartdoc.extend.ApiExtendConfig;
@@ -38,9 +36,7 @@ import com.smartdoc.util.ClassLoaderUtil;
 import com.smartdoc.util.FileUtil;
 import com.smartdoc.util.MojoUtils;
 import com.thoughtworks.qdox.JavaProjectBuilder;
-import com.thoughtworks.qdox.library.ErrorHandler;
 import com.thoughtworks.qdox.library.SortedClassLibraryBuilder;
-import com.thoughtworks.qdox.parser.ParseException;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactResolutionRequest;
@@ -48,7 +44,6 @@ import org.apache.maven.artifact.resolver.ArtifactResolutionResult;
 import org.apache.maven.artifact.resolver.filter.ArtifactFilter;
 import org.apache.maven.artifact.resolver.filter.ScopeArtifactFilter;
 import org.apache.maven.execution.MavenSession;
-import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -66,7 +61,11 @@ import org.apache.maven.shared.dependency.graph.DependencyNode;
 
 import java.io.File;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.stream.Collectors;
@@ -118,7 +117,6 @@ public abstract class BaseDocsGeneratorMojo extends AbstractMojo {
 
     private DependencyNode rootNode;
 
-    protected Boolean isApiCreate=Boolean.FALSE;
 
     protected JavaProjectBuilder javaProjectBuilder;
 
@@ -126,7 +124,6 @@ public abstract class BaseDocsGeneratorMojo extends AbstractMojo {
 
     @Component(role = org.apache.maven.project.ProjectBuilder.class)
     protected ProjectBuilder projectBuilder;
-
 
 
     public abstract void executeMojo(ApiExtendConfig apiExtendConfig, JavaProjectBuilder javaProjectBuilder)
@@ -147,10 +144,12 @@ public abstract class BaseDocsGeneratorMojo extends AbstractMojo {
         }
         this.getLog().info("------------------------------------------------------------------------");
         this.getLog().info("Smart-doc Start preparing sources at: " + DateTimeUtil.nowStrTime());
-        projectArtifacts = project.getDependencies().stream().map(moduleName-> moduleName.getGroupId() + ":"+moduleName.getArtifactId()).collect(Collectors.toList());
+        projectArtifacts =
+                project.getDependencies().stream().map(moduleName -> moduleName.getGroupId() + ":" + moduleName.getArtifactId()).collect(Collectors.toList());
         javaProjectBuilder = buildJavaProjectBuilder();
         javaProjectBuilder.setEncoding(Charset.DEFAULT_CHARSET);
-        ApiExtendConfig apiExtendConfig = MojoUtils.buildConfig(configFile, projectName, project, projectBuilder, session, projectArtifacts, getLog());
+        ApiExtendConfig apiExtendConfig = MojoUtils.buildConfig(configFile, projectName, project, projectBuilder, session, projectArtifacts,
+                getLog());
         if (Objects.isNull(apiExtendConfig)) {
             this.getLog().info(GlobalConstants.ERROR_MSG);
             return;
@@ -162,10 +161,14 @@ public abstract class BaseDocsGeneratorMojo extends AbstractMojo {
 
         String goal = mojoEx.getGoal();
         //mojo it's api import
-        if(goal.equals(MojoConstants.API_IMPORT)){
+        if (goal.equals(MojoConstants.API_IMPORT)) {
             //it's create apiInfo
             getLog().info("Begin Import ApiInfo to Remote auth...");
-        }else {
+        } else if (goal.equals(MojoConstants.WORD_DOC)) {
+            //begin generate doc
+            getLog().info("Begin word doc...");
+            getLog().info("Word documentation is output to==>" + apiExtendConfig.getOutDocDir() + File.separator + apiExtendConfig.getOutDocFileName()+".doc");
+        } else {
             //it‘s generate api doc
             String outPath = apiExtendConfig.getOutPath();
             if (StringUtil.isEmpty(outPath)) {
@@ -194,9 +197,9 @@ public abstract class BaseDocsGeneratorMojo extends AbstractMojo {
      * @throws MojoExecutionException
      */
     private JavaProjectBuilder buildJavaProjectBuilder() throws MojoExecutionException {
-        SortedClassLibraryBuilder classLibraryBuilder=new SortedClassLibraryBuilder();
-        classLibraryBuilder.setErrorHander(e -> getLog().error("Parse error",e));
-        JavaProjectBuilder javaDocBuilder =  JavaProjectBuilderHelper.create(classLibraryBuilder);
+        SortedClassLibraryBuilder classLibraryBuilder = new SortedClassLibraryBuilder();
+        classLibraryBuilder.setErrorHander(e -> getLog().error("Parse error", e));
+        JavaProjectBuilder javaDocBuilder = JavaProjectBuilderHelper.create(classLibraryBuilder);
         javaDocBuilder.setEncoding(Charset.DEFAULT_CHARSET);
         javaDocBuilder.setErrorHandler(e -> getLog().warn(e.getMessage()));
         //addSourceTree

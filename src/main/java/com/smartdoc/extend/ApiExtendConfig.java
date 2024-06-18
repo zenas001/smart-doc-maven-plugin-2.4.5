@@ -16,10 +16,24 @@ public class ApiExtendConfig extends ApiConfig {
      * importEnvFile
      */
     private String importEnvFile;
+
     /**
      * controller controller
      */
     private List<ApiImport> importControllers;
+
+    /************************ out api word doc ****************************/
+
+    private String interfaceNameSpace;
+    /**
+     * out doc file name
+     */
+    private String outDocFileName;
+    /**
+     * out doc file dir
+     */
+    private String outDocDir;
+
 
     public List<ApiImport> getImportControllers() {
         return importControllers;
@@ -45,4 +59,27 @@ public class ApiExtendConfig extends ApiConfig {
         this.importEnvFile = importEnvFile;
     }
 
+    public String getOutDocFileName() {
+        return outDocFileName;
+    }
+
+    public void setOutDocFileName(String outDocFileName) {
+        this.outDocFileName = outDocFileName;
+    }
+
+    public String getOutDocDir() {
+        return outDocDir;
+    }
+
+    public void setOutDocDir(String outDocDir) {
+        this.outDocDir = outDocDir;
+    }
+
+    public String getInterfaceNameSpace() {
+        return interfaceNameSpace;
+    }
+
+    public void setInterfaceNameSpace(String interfaceNameSpace) {
+        this.interfaceNameSpace = interfaceNameSpace;
+    }
 }
