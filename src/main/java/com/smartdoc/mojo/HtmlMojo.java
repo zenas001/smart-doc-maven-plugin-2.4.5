@@ -23,7 +23,6 @@
 package com.smartdoc.mojo;
 
 
-import cn.hutool.core.util.ZipUtil;
 import com.power.doc.builder.HtmlApiDocBuilder;
 import com.smartdoc.constant.MojoConstants;
 import com.smartdoc.extend.ApiExtendConfig;
@@ -46,6 +45,7 @@ public class HtmlMojo extends BaseDocsGeneratorMojo {
     @Override
     public void executeMojo(ApiExtendConfig apiConfig, JavaProjectBuilder javaProjectBuilder) throws MojoExecutionException, MojoFailureException {
         try {
+            //add  ignore field
             HtmlApiDocBuilder.buildApiDoc(apiConfig, javaProjectBuilder);
         } catch (Exception e) {
             getLog().error(e);

@@ -167,7 +167,6 @@ public abstract class BaseDocsGeneratorMojo extends AbstractMojo {
         } else if (goal.equals(MojoConstants.WORD_DOC)) {
             //begin generate doc
             getLog().info("Begin word doc...");
-            getLog().info("Word documentation is output to==>" + apiExtendConfig.getOutDocDir() + File.separator + apiExtendConfig.getOutDocFileName()+".doc");
         } else {
             //it‘s generate api doc
             String outPath = apiExtendConfig.getOutPath();

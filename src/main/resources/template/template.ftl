@@ -5,7 +5,7 @@
 <!--题注序列编号-->
 <#import "utils.ftl" as utils/>
 <!--表格统一宽度-->
-<#global tbWidth=7000/>
+<#global tbWidth=8500/>
 <!--当前表格题注序列号-->
 <#global tbNo=0 />
 <pkg:package xmlns:pkg="http://schemas.microsoft.com/office/2006/xmlPackage">
@@ -119,7 +119,7 @@
                                 <w:sz w:val="44"/>
                                 <w:szCs w:val="44"/>
                             </w:rPr>
-                            <w:t>会员中心（个人客户开发）</w:t>
+                            <w:t>会员中心（<#if outDocBusinessModuleName??>${outDocBusinessModuleName}<#else>输入标题</#if>）</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="552908CE" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00CD27AF"/>
@@ -189,23 +189,7 @@
                                 <w:sz w:val="28"/>
                                 <w:szCs w:val="28"/>
                             </w:rPr>
-                            <w:t>2</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:cs="微软雅黑"/>
-                                <w:sz w:val="28"/>
-                                <w:szCs w:val="28"/>
-                            </w:rPr>
-                            <w:t>02</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:ascii="微软雅黑" w:eastAsia="微软雅黑" w:hAnsi="微软雅黑" w:cs="微软雅黑" w:hint="eastAsia"/>
-                                <w:sz w:val="28"/>
-                                <w:szCs w:val="28"/>
-                            </w:rPr>
-                            <w:t>3年12月6日</w:t>
+                            <w:t>${.now?string('yyyy年MM月dd日')}</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="6F85F7DD" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00CD27AF">
@@ -748,7 +732,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>20220909</w:t>
+                                        <w:t>${.now?string('yyyyMMdd')}</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -802,7 +786,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>无</w:t>
+                                        <w:t>无。</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -3077,7 +3061,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="42A5ED4D" w14:textId="6EB4835B" w:rsidR="008D2D99" w:rsidRDefault="00360CEF" w:rsidP="008D2D99">
@@ -3121,7 +3105,7 @@
                                 <w:rPr>
                                     <w:rFonts w:hint="eastAsia"/>
                                 </w:rPr>
-                                <w:t>服务接口名</w:t>
+                                <w:t>&#160;&#160;&#160;&#160;服务类名:</w:t>
                             </w:r>
                             <w:proofErr w:type="spellStart"/>
                             <w:r>
@@ -3133,14 +3117,11 @@
                             <w:proofErr w:type="spellEnd"/>
                         </w:p>
                         <w:p w14:paraId="091D22F7" w14:textId="3DDB04BF" w:rsidR="00B243FF" w:rsidRDefault="00B243FF" w:rsidP="00F6674E">
-                            <w:pPr>
-                                <w:pStyle w:val="afe"/>
-                            </w:pPr>
                             <w:r>
                                 <w:rPr>
                                     <w:rFonts w:hint="eastAsia"/>
                                 </w:rPr>
-                                <w:t>功能概述：${service.description}</w:t>
+                                <w:t>&#160;&#160;&#160;&#160;功能概述：${service.description}</w:t>
                             </w:r>
                         </w:p>
                         <w:p w14:paraId="3DD318ED" w14:textId="77777777" w:rsidR="00B243FF" w:rsidRDefault="00B243FF" w:rsidP="00B243FF">
@@ -3148,7 +3129,7 @@
                                 <w:rPr>
                                     <w:rFonts w:hint="eastAsia"/>
                                 </w:rPr>
-                                <w:t>命名空间：</w:t>
+                                <w:t>&#160;&#160;&#160;&#160;命名空间：</w:t>
                             </w:r>
                             <w:proofErr w:type="spellStart"/>
                             <w:proofErr w:type="gramStart"/>
@@ -3169,7 +3150,7 @@
                                 <w:rPr>
                                     <w:rFonts w:hint="eastAsia"/>
                                 </w:rPr>
-                                <w:t>访问路径</w:t>
+                                <w:t>&#160;&#160;&#160;&#160;访问路径</w:t>
                             </w:r>
                             <w:r>
                                 <w:rPr>
@@ -3228,29 +3209,27 @@
                         <w:tbl>
                             <w:tblPr>
                                 <w:tblStyle w:val="af3"/>
-                                <w:tblpPr w:leftFromText="180" w:rightFromText="180" w:vertAnchor="text" w:horzAnchor="margin" w:tblpXSpec="center"
-                                          w:tblpY="345"/>
-                                <w:tblOverlap w:val="never"/>
                                 <w:tblW w:w="${tbWidth}" w:type="dxa"/>
                                 <w:jc w:val="center"/>
+                                    <w:tblLayout w:type="fixed"/>
                                 <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1" w:lastColumn="0" w:noHBand="0" w:noVBand="1"/>
                             </w:tblPr>
                             <w:tblGrid>
-                                <w:gridCol w:w="692"/>
-                                <w:gridCol w:w="2012"/>
-                                <w:gridCol w:w="2853"/>
-                                <w:gridCol w:w="700"/>
-                                <w:gridCol w:w="743"/>
+                                <w:gridCol w:w="1500"/>
+                                <w:gridCol w:w="3000"/>
+                                <w:gridCol w:w="1500"/>
+                                <w:gridCol w:w="1000"/>
+                                <w:gridCol w:w="1200"/>
                             </w:tblGrid>
                             <w:tr w:rsidR="00B243FF" w14:paraId="5EE292CC" w14:textId="77777777" w:rsidTr="0034121D">
                                 <w:trPr>
                                     <w:cantSplit/>
-                                    <w:trHeight w:val="301"/>
                                     <w:jc w:val="center"/>
+                                    <w:tblHeader/>
                                 </w:trPr>
                                 <w:tc>
                                     <w:tcPr>
-                                        <w:tcW w:w="692" w:type="dxa"/>
+                                        <w:tcW w:w="0" w:type="dxa"/>
                                         <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
                                     </w:tcPr>
                                     <w:p w14:paraId="6968550C" w14:textId="77777777" w:rsidR="00B243FF" w:rsidRDefault="00B243FF" w:rsidP="00FC20B2">
@@ -3264,7 +3243,7 @@
                                 </w:tc>
                                 <w:tc>
                                     <w:tcPr>
-                                        <w:tcW w:w="2012" w:type="dxa"/>
+                                        <w:tcW w:w="0" w:type="dxa"/>
                                         <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
                                     </w:tcPr>
                                     <w:p w14:paraId="62939A61" w14:textId="77777777" w:rsidR="00B243FF" w:rsidRDefault="00B243FF" w:rsidP="00FC20B2">
@@ -3278,7 +3257,7 @@
                                 </w:tc>
                                 <w:tc>
                                     <w:tcPr>
-                                        <w:tcW w:w="2853" w:type="dxa"/>
+                                        <w:tcW w:w="0" w:type="dxa"/>
                                         <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
                                     </w:tcPr>
                                     <w:p w14:paraId="53966017" w14:textId="77777777" w:rsidR="00B243FF" w:rsidRDefault="00B243FF" w:rsidP="00FC20B2">
@@ -3292,7 +3271,7 @@
                                 </w:tc>
                                 <w:tc>
                                     <w:tcPr>
-                                        <w:tcW w:w="700" w:type="dxa"/>
+                                        <w:tcW w:w="0" w:type="dxa"/>
                                         <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
                                     </w:tcPr>
                                     <w:p w14:paraId="4AF13EED" w14:textId="77777777" w:rsidR="00B243FF" w:rsidRDefault="00B243FF" w:rsidP="00FC20B2">
@@ -3306,7 +3285,7 @@
                                 </w:tc>
                                 <w:tc>
                                     <w:tcPr>
-                                        <w:tcW w:w="743" w:type="dxa"/>
+                                        <w:tcW w:w="0" w:type="dxa"/>
                                         <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
                                     </w:tcPr>
                                     <w:p w14:paraId="2407EB82" w14:textId="77777777" w:rsidR="00B243FF" w:rsidRDefault="00B243FF" w:rsidP="00FC20B2">
@@ -3410,7 +3389,7 @@
                                                     <w:kern w:val="2"/>
                                                     <w:szCs w:val="24"/>
                                                 </w:rPr>
-                                                <w:t>V1.0</w:t>
+                                                <w:t>V${method.version}</w:t>
                                             </w:r>
                                         </w:p>
                                     </w:tc>
@@ -3625,13 +3604,12 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>个人会员信息服务</w:t>
+                            <w:t>${service.title}</w:t>
                         </w:r>
                         <w:bookmarkEnd w:id="57"/>
                         <w:bookmarkEnd w:id="58"/>
                         <w:bookmarkEnd w:id="59"/>
                     </w:p>
-                    </#list>
                     <w:bookmarkEnd w:id="54"/>
                     <w:bookmarkEnd w:id="55"/>
                     <w:p w14:paraId="4F849AE2" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00CD27AF">
@@ -3668,7 +3646,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>服务使用</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;服务使用</w:t>
                         </w:r>
                         <w:r>
                             <w:rPr>
@@ -3680,19 +3658,19 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>协议，华为</w:t>
+                            <w:t>协议，</w:t>
                         </w:r>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>Spring Cloud</w:t>
+                            <w:t>通过华为封装Spring Cloud</w:t>
                         </w:r>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>进行服务注册发现。</w:t>
+                            <w:t>Feign进行服务注册发现。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="26C8C523" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -3700,7 +3678,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>提供会员账号认证以及手机号绑定解绑相关业务</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;提供${service.title}</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="08BA31EC" w14:textId="77777777" w:rsidR="007F7763" w:rsidRDefault="007F7763" w:rsidP="007F7763">
@@ -3727,12 +3705,11 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <!--这里遍历contoller 方法 method 注释 以及 请求方式,请求参数,返回结果,异常 start-->
                     <!--服务接口设计正文 start-->
-                    <#list serviceOrderList as service>
                         <#list service.methodDetails as method>
                             <w:p w14:paraId="1052DB4C" w14:textId="015085D2" w:rsidR="003E5E5C" w:rsidRPr="003E5E5C" w:rsidRDefault="00000000"
                                  w:rsidP="003E5E5C">
@@ -3772,17 +3749,188 @@
                                     <w:rPr>
                                         <w:rFonts w:hint="eastAsia"/>
                                     </w:rPr>
-                                    <w:t>接口英文名：</w:t>
+                                    <w:t>&#160;&#160;&#160;&#160;${method.methodRemark}接口。</w:t>
                                 </w:r>
+                            </w:p>
+                            <w:p w14:paraId="55B3A902" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
+                                <w:pPr>
+                                    <w:pStyle w:val="4"/>
+                                </w:pPr>
                                 <w:r>
                                     <w:rPr>
                                         <w:rFonts w:hint="eastAsia"/>
-                                        <w:kern w:val="2"/>
-                                        <w:szCs w:val="24"/>
                                     </w:rPr>
-                                    <w:t>${method.methodName}</w:t>
+                                    <w:t>接口</w:t>
                                 </w:r>
                             </w:p>
+                            <!--题注start-->
+                            <w:p w14:paraId="4012900D" w14:textId="77777777" w:rsidR="008E17BA" w:rsidRDefault="00E828E6" w:rsidP="00D868D2">
+                                    <w:pPr>
+                                        <w:jc w:val="center"/>
+                                    </w:pPr>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>表</w:t>
+                                    </w:r>
+                                    <w:r w:rsidR="008E17BA">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t xml:space="preserve"> </w:t>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:fldChar w:fldCharType="begin"/>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:instrText xml:space="preserve"> </w:instrText>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:instrText xml:space="preserve">SEQ </w:instrText>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:instrText>表格</w:instrText>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:instrText xml:space="preserve"> \* CHINESENUM3</w:instrText>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:instrText xml:space="preserve"> </w:instrText>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:fldChar w:fldCharType="separate"/>
+                                    </w:r>
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                            <w:noProof/>
+                                        </w:rPr>
+                                        <#global tbNo=tbNo+1/>
+                                        <w:t>${utils.seqNumToChinese(tbNo)}</w:t>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:fldChar w:fldCharType="end"/>
+                                    </w:r>
+                                    <w:r w:rsidR="001D7220">
+                                        <w:t xml:space="preserve"> </w:t>
+                                    </w:r>
+                                    <w:r w:rsidR="008E17BA">
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>接口</w:t>
+                                    </w:r>
+                                </w:p>
+                           <!--题注end-->
+                           <!--表格start-->
+                            <w:tbl>
+                                    <!--表格style 配置-->
+                                    <w:tblPr>
+                                        <w:tblStyle w:val="af3"/>
+                                        <w:tblW w:w="${tbWidth}" w:type="dxa"/>
+                                        <w:jc w:val="center"/>
+                                        <w:tblLayout w:type="fixed"/>
+                                        <w:tblLook w:val="04A0" w:firstRow="1" w:lastRow="0" w:firstColumn="1"
+                                                   w:lastColumn="0" w:noHBand="0"
+                                                   w:noVBand="1"/>
+                                    </w:tblPr>
+                                    <w:tblGrid>
+                                        <w:gridCol w:w="6000"/>
+                                        <w:gridCol w:w="2000"/>
+                                    </w:tblGrid>
+                                    <w:tr w:rsidR="00D13A6C" w14:paraId="59DBDB19" w14:textId="77777777" w:rsidTr="00D13A6C">
+                                        <w:trPr>
+                                            <w:jc w:val="center"/>
+                                            <w:tblHeader/>
+                                        </w:trPr>
+                                        <w:tc>
+                                            <w:tcPr>
+                                                <w:tcW w:w="0" w:type="dxa"/>
+                                                <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
+                                                <w:vAlign w:val="center"/>
+                                            </w:tcPr>
+                                            <w:p w14:paraId="12E7666C" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C">
+                                                <w:r>
+                                                    <w:rPr>
+                                                        <w:rFonts w:hint="eastAsia"/>
+                                                    </w:rPr>
+                                                    <w:t>类名</w:t>
+                                                </w:r>
+                                            </w:p>
+                                        </w:tc>
+                                        <w:tc>
+                                            <w:tcPr>
+                                                <w:tcW w:w="0" w:type="dxa"/>
+                                                <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
+                                                <w:vAlign w:val="center"/>
+                                            </w:tcPr>
+                                            <w:p w14:paraId="5250EF36" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C">
+                                                <w:r>
+                                                    <w:rPr>
+                                                        <w:rFonts w:hint="eastAsia"/>
+                                                    </w:rPr>
+                                                    <w:t>方法名</w:t>
+                                                </w:r>
+                                            </w:p>
+                                        </w:tc>
+                                    </w:tr>
+                                    <!--请求参数表格 遍历 start-->
+                            <w:tr w:rsidR="00D13A6C" w14:paraId="07B5F40A" w14:textId="77777777" w:rsidTr="00D13A6C">
+                                <w:trPr>
+                                    <w:trHeight w:val="271"/>
+                                    <w:jc w:val="center"/>
+                                </w:trPr>
+                                <w:tc>
+                                    <w:tcPr>
+                                        <w:tcW w:w="0" w:type="dxa"/>
+                                    </w:tcPr>
+                                    <w:p w14:paraId="627139E7" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C">
+                                        <w:pPr>
+                                            <w:rPr>
+                                                <w:rFonts w:ascii="微软雅黑" w:hAnsi="微软雅黑" w:cs="Times New Roman"/>
+                                                <w:sz w:val="18"/>
+                                                <w:szCs w:val="18"/>
+                                            </w:rPr>
+                                        </w:pPr>
+                                        <w:r>
+                                            <w:rPr>
+                                                <w:rFonts w:ascii="微软雅黑" w:hAnsi="微软雅黑" w:cs="Times New Roman" w:hint="eastAsia"/>
+                                                <w:sz w:val="18"/>
+                                                <w:szCs w:val="18"/>
+                                            </w:rPr>
+                                            <w:t>${service.nameSpace+"."+service.interfaceName}</w:t>
+                                        </w:r>
+                                    </w:p>
+                                </w:tc>
+                                <w:tc>
+                                    <w:tcPr>
+                                        <w:tcW w:w="0" w:type="dxa"/>
+                                    </w:tcPr>
+                                    <w:p w14:paraId="2CC73B5F" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C">
+                                        <w:r>
+                                            <w:rPr>
+                                                <w:rFonts w:ascii="微软雅黑" w:hAnsi="微软雅黑" w:cs="Times New Roman" w:hint="eastAsia"/>
+                                                <w:sz w:val="18"/>
+                                                <w:szCs w:val="18"/>
+                                            </w:rPr>
+                                            <w:t>${method.methodName}</w:t>
+                                        </w:r>
+                                    </w:p>
+                                </w:tc>
+                            </w:tr>
+                          </w:tbl>
+                            <!--表格end-->
+                            <w:p w14:paraId="1B0389DC" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00CD27AF"/>
                             <w:p w14:paraId="4932E1F0" w14:textId="5DF66272" w:rsidR="003A01AE" w:rsidRPr="0034121D" w:rsidRDefault="00000000"
                                  w:rsidP="0034121D">
                                 <w:pPr>
@@ -3875,9 +4023,6 @@
                                 <!--表格style 配置-->
                                 <w:tblPr>
                                     <w:tblStyle w:val="af3"/>
-                                    <w:tblpPr w:leftFromText="180" w:rightFromText="180" w:vertAnchor="text" w:horzAnchor="page" w:tblpXSpec="center"
-                                              w:tblpY="300"/>
-                                    <w:tblOverlap w:val="never"/>
                                     <w:tblW w:w="${tbWidth}" w:type="dxa"/>
                                     <w:jc w:val="center"/>
                                     <w:tblLayout w:type="fixed"/>
@@ -3885,33 +4030,69 @@
                                                w:noVBand="1"/>
                                 </w:tblPr>
                                 <w:tblGrid>
-                                    <w:gridCol w:w="1400"/>
-                                    <w:gridCol w:w="1400"/>
-                                    <w:gridCol w:w="1400"/>
-                                    <w:gridCol w:w="1400"/>
-                                    <w:gridCol w:w="1400"/>
+                                    <w:gridCol w:w="700"/>
+                                    <w:gridCol w:w="900"/>
+                                    <w:gridCol w:w="1100"/>
+                                    <w:gridCol w:w="700"/>
+                                    <w:gridCol w:w="4600"/>
                                 </w:tblGrid>
-                                <w:tr w:rsidR="00D13A6C" w14:paraId="59DBDB19" w14:textId="77777777" w:rsidTr="00D13A6C">
+                                <w:tr w:rsidR="00341BCE" w14:paraId="558C8B24" w14:textId="77777777" w:rsidTr="00341BCE">
                                     <w:trPr>
                                         <w:jc w:val="center"/>
+                                        <w:tblHeader/>
                                     </w:trPr>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="0" w:type="dxa"/>
+                                            <w:tcW w:w="1515" w:type="dxa"/>
+                                            <w:tcBorders>
+                                                <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                            </w:tcBorders>
                                             <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
                                         </w:tcPr>
-                                        <w:p w14:paraId="232D10BA" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C"/>
+                                        <w:p w14:paraId="310B4E3F" w14:textId="77777777" w:rsidR="00341BCE" w:rsidRDefault="00341BCE">
+                                            <w:pPr>
+                                                <w:rPr>
+                                                    <w:rFonts w:ascii="宋体" w:eastAsia="宋体" w:hAnsi="宋体" w:cs="宋体"/>
+                                                    <w:szCs w:val="21"/>
+                                                    <w:lang w:bidi="ar"/>
+                                                </w:rPr>
+                                            </w:pPr>
+                                            <w:r>
+                                                <w:rPr>
+                                                    <w:rFonts w:ascii="宋体" w:eastAsia="宋体" w:hAnsi="宋体" w:cs="宋体" w:hint="eastAsia"/>
+                                                    <w:szCs w:val="21"/>
+                                                    <w:lang w:bidi="ar"/>
+                                                </w:rPr>
+                                                <w:t>序号</w:t>
+                                            </w:r>
+                                        </w:p>
                                     </w:tc>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="0" w:type="dxa"/>
+                                            <w:tcW w:w="1515" w:type="dxa"/>
+                                            <w:tcBorders>
+                                                <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                            </w:tcBorders>
                                             <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
-                                            <w:vAlign w:val="center"/>
                                         </w:tcPr>
-                                        <w:p w14:paraId="12E7666C" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C">
+                                        <w:p w14:paraId="19C592DE" w14:textId="77777777" w:rsidR="00341BCE" w:rsidRDefault="00341BCE">
+                                            <w:pPr>
+                                                <w:rPr>
+                                                    <w:rFonts w:ascii="Calibri" w:eastAsia="宋体" w:hAnsi="Calibri" w:cs="Times New Roman"/>
+                                                    <w:szCs w:val="21"/>
+                                                </w:rPr>
+                                            </w:pPr>
                                             <w:r>
                                                 <w:rPr>
-                                                    <w:rFonts w:hint="eastAsia"/>
+                                                    <w:rFonts w:ascii="宋体" w:eastAsia="宋体" w:hAnsi="宋体" w:cs="宋体" w:hint="eastAsia"/>
+                                                    <w:szCs w:val="21"/>
+                                                    <w:lang w:bidi="ar"/>
                                                 </w:rPr>
                                                 <w:t>类型</w:t>
                                             </w:r>
@@ -3919,14 +4100,27 @@
                                     </w:tc>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="0" w:type="dxa"/>
+                                            <w:tcW w:w="6040" w:type="dxa"/>
+                                            <w:tcBorders>
+                                                <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                            </w:tcBorders>
                                             <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
-                                            <w:vAlign w:val="center"/>
                                         </w:tcPr>
-                                        <w:p w14:paraId="5250EF36" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C">
+                                        <w:p w14:paraId="4BA0092B" w14:textId="77777777" w:rsidR="00341BCE" w:rsidRDefault="00341BCE">
+                                            <w:pPr>
+                                                <w:rPr>
+                                                    <w:rFonts w:ascii="Calibri" w:eastAsia="宋体" w:hAnsi="Calibri" w:cs="Times New Roman"/>
+                                                    <w:szCs w:val="21"/>
+                                                </w:rPr>
+                                            </w:pPr>
                                             <w:r>
                                                 <w:rPr>
-                                                    <w:rFonts w:hint="eastAsia"/>
+                                                    <w:rFonts w:ascii="宋体" w:eastAsia="宋体" w:hAnsi="宋体" w:cs="宋体" w:hint="eastAsia"/>
+                                                    <w:szCs w:val="21"/>
+                                                    <w:lang w:bidi="ar"/>
                                                 </w:rPr>
                                                 <w:t>属性</w:t>
                                             </w:r>
@@ -3934,14 +4128,27 @@
                                     </w:tc>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="0" w:type="dxa"/>
+                                            <w:tcW w:w="6040" w:type="dxa"/>
+                                            <w:tcBorders>
+                                                <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                            </w:tcBorders>
                                             <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
-                                            <w:vAlign w:val="center"/>
                                         </w:tcPr>
-                                        <w:p w14:paraId="05F5CA61" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C">
+                                        <w:p w14:paraId="4BA0092B" w14:textId="77777777" w:rsidR="00341BCE" w:rsidRDefault="00341BCE">
+                                            <w:pPr>
+                                                <w:rPr>
+                                                    <w:rFonts w:ascii="Calibri" w:eastAsia="宋体" w:hAnsi="Calibri" w:cs="Times New Roman"/>
+                                                    <w:szCs w:val="21"/>
+                                                </w:rPr>
+                                            </w:pPr>
                                             <w:r>
                                                 <w:rPr>
-                                                    <w:rFonts w:hint="eastAsia"/>
+                                                    <w:rFonts w:ascii="宋体" w:eastAsia="宋体" w:hAnsi="宋体" w:cs="宋体" w:hint="eastAsia"/>
+                                                    <w:szCs w:val="21"/>
+                                                    <w:lang w:bidi="ar"/>
                                                 </w:rPr>
                                                 <w:t>必填</w:t>
                                             </w:r>
@@ -3949,14 +4156,27 @@
                                     </w:tc>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="0" w:type="dxa"/>
+                                            <w:tcW w:w="6040" w:type="dxa"/>
+                                            <w:tcBorders>
+                                                <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:bottom w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                                <w:right w:val="single" w:sz="4" w:space="0" w:color="auto"/>
+                                            </w:tcBorders>
                                             <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
-                                            <w:vAlign w:val="center"/>
                                         </w:tcPr>
-                                        <w:p w14:paraId="4161A3F6" w14:textId="77777777" w:rsidR="00D13A6C" w:rsidRDefault="00D13A6C">
+                                        <w:p w14:paraId="4BA0092B" w14:textId="77777777" w:rsidR="00341BCE" w:rsidRDefault="00341BCE">
+                                            <w:pPr>
+                                                <w:rPr>
+                                                    <w:rFonts w:ascii="Calibri" w:eastAsia="宋体" w:hAnsi="Calibri" w:cs="Times New Roman"/>
+                                                    <w:szCs w:val="21"/>
+                                                </w:rPr>
+                                            </w:pPr>
                                             <w:r>
                                                 <w:rPr>
-                                                    <w:rFonts w:hint="eastAsia"/>
+                                                    <w:rFonts w:ascii="宋体" w:eastAsia="宋体" w:hAnsi="宋体" w:cs="宋体" w:hint="eastAsia"/>
+                                                    <w:szCs w:val="21"/>
+                                                    <w:lang w:bidi="ar"/>
                                                 </w:rPr>
                                                 <w:t>描述</w:t>
                                             </w:r>
@@ -4069,7 +4289,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>无</w:t>
+                                        <w:t>无。</w:t>
                                     </w:r>
                                 </w:p>
                             </#if>
@@ -4166,18 +4386,18 @@
                                                w:noVBand="1"/>
                                 </w:tblPr>
                                 <w:tblGrid>
-                                    <w:gridCol w:w="1199"/>
-                                    <w:gridCol w:w="1198"/>
-                                    <w:gridCol w:w="4603"/>
+                                    <w:gridCol w:w="1000"/>
+                                    <w:gridCol w:w="2000"/>
+                                    <w:gridCol w:w="5000"/>
                                 </w:tblGrid>
                                 <w:tr w:rsidR="00341BCE" w14:paraId="558C8B24" w14:textId="77777777" w:rsidTr="00341BCE">
                                     <w:trPr>
-                                        <w:trHeight w:val="328"/>
                                         <w:jc w:val="center"/>
+                                        <w:tblHeader/>
                                     </w:trPr>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="1515" w:type="dxa"/>
+                                            <w:tcW w:w="0" w:type="dxa"/>
                                             <w:tcBorders>
                                                 <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
                                                 <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
@@ -4206,7 +4426,7 @@
                                     </w:tc>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="1515" w:type="dxa"/>
+                                            <w:tcW w:w="0" w:type="dxa"/>
                                             <w:tcBorders>
                                                 <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
                                                 <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
@@ -4234,7 +4454,7 @@
                                     </w:tc>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="6040" w:type="dxa"/>
+                                            <w:tcW w:w="0" w:type="dxa"/>
                                             <w:tcBorders>
                                                 <w:top w:val="single" w:sz="4" w:space="0" w:color="auto"/>
                                                 <w:left w:val="single" w:sz="4" w:space="0" w:color="auto"/>
@@ -4440,16 +4660,17 @@
                                                w:noVBand="1"/>
                                 </w:tblPr>
                                 <w:tblGrid>
-                                    <w:gridCol w:w="1855"/>
-                                    <w:gridCol w:w="5145"/>
+                                    <w:gridCol w:w="2000"/>
+                                    <w:gridCol w:w="6000"/>
                                 </w:tblGrid>
                                 <w:tr w:rsidR="00CD27AF" w14:paraId="7084B854" w14:textId="77777777">
                                     <w:trPr>
                                         <w:jc w:val="center"/>
+                                        <w:tblHeader/>
                                     </w:trPr>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="2220" w:type="dxa"/>
+                                            <w:tcW w:w="0" w:type="dxa"/>
                                             <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
                                         </w:tcPr>
                                         <w:p w14:paraId="37FD582A" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4463,7 +4684,7 @@
                                     </w:tc>
                                     <w:tc>
                                         <w:tcPr>
-                                            <w:tcW w:w="6252" w:type="dxa"/>
+                                            <w:tcW w:w="0" w:type="dxa"/>
                                             <w:shd w:val="clear" w:color="auto" w:fill="00B0F0"/>
                                         </w:tcPr>
                                         <w:p w14:paraId="0D2C1DED" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4621,6 +4842,20 @@
                                     <w:t>实现逻辑</w:t>
                                 </w:r>
                             </w:p>
+                            <w:p w14:paraId="6867869E" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="003E5E5C">
+                                <w:pPr>
+                                    <w:rPr>
+                                        <w:kern w:val="2"/>
+                                        <w:szCs w:val="24"/>
+                                    </w:rPr>
+                                </w:pPr>
+                                <w:r>
+                                    <w:rPr>
+                                        <w:rFonts w:hint="eastAsia"/>
+                                    </w:rPr>
+                                    <w:t>&#160;&#160;&#160;&#160;${method.methodRemark}。</w:t>
+                                </w:r>
+                            </w:p>
                         </#list>
                     </#list>
                     <!--服务接口设计正文 end-->
@@ -4644,7 +4879,7 @@
                                 <w:sz w:val="20"/>
                                 <w:szCs w:val="20"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="44FC8AE3" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4671,7 +4906,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="7FB6BF1A" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4694,7 +4929,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="25AEAF81" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4828,7 +5063,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="3FCBB1D8" w14:textId="170F353C" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
@@ -4861,7 +5096,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="70D37DEB" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4891,7 +5126,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="20047AB4" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4919,7 +5154,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="188D2D61" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4947,7 +5182,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="44046B5C" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4979,7 +5214,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="6CAF8000" w14:textId="1B11930A" w:rsidR="00DB0A2A" w:rsidRDefault="00000000" w:rsidP="0034121D">
@@ -5009,7 +5244,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="2272A77E" w14:textId="6F0DDBBE" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -5039,7 +5274,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="3F9EE172" w14:textId="3D8DE581" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
@@ -5068,7 +5303,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="4D3B9C11" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -5091,7 +5326,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="302B4C8C" w14:textId="41B278FE" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
@@ -5134,7 +5369,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="759D526C" w14:textId="49D19D19" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
@@ -5178,7 +5413,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="77002127" w14:textId="4C2435DD" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
@@ -5203,7 +5438,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="5D563F51" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -5226,7 +5461,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无</w:t>
+                            <w:t>无。</w:t>
                         </w:r>
                     </w:p>
                     <w:sectPr w:rsidR="00CD27AF">

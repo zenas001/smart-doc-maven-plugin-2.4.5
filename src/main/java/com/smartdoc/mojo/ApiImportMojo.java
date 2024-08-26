@@ -30,7 +30,6 @@ import cn.hutool.http.HttpException;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSONConfig;
 import cn.hutool.json.JSONUtil;
 import com.power.doc.builder.ProjectDocConfigBuilder;
 import com.power.doc.factory.BuildTemplateFactory;
@@ -103,7 +102,7 @@ public class ApiImportMojo extends BaseDocsGeneratorMojo {
             List<ApiInfo> apiInfoList = new ArrayList<>();
             //get call remote api auth params
             //controllerMap
-            Map<String, ApiImport> controllerMap = controllers.stream().collect(Collectors.toMap(ApiImport::getController, Function.identity()));
+            Map<String, ApiImport> controllerMap = controllers.stream().collect(Collectors.toMap(ApiImport::getClassName, Function.identity()));
             //get scan controller api doc info
             Map<String, ApiDoc> apiDocMap = docBuildTemplate.getApiData(configBuilder).stream().collect(Collectors.toMap(ApiDoc::getName,
                     Function.identity()));
@@ -112,7 +111,7 @@ public class ApiImportMojo extends BaseDocsGeneratorMojo {
                     configBuilder.getJavaProjectBuilder().getClasses().stream()
                             .filter(javaClass -> javaClass.getName().contains("Controller"))
                             .collect(Collectors.toMap(JavaClass::getName, Function.identity()));
-            controllerMap.forEach((name, apiImport) -> apiInfoList.addAll(ExtendUtils.getApiParetamList(apiImport, apiDocMap.get(name),
+            controllerMap.forEach((name, apiImport) -> apiInfoList.addAll(ExtendUtils.getApiInfoList(apiImport, apiDocMap.get(name),
                     apiClassMap.get(name))));
             log.info("api info:{}", JsonUtil.toPrettyJson(apiInfoList));
             if (CollUtil.isEmpty(apiInfoList)) {
@@ -154,6 +153,8 @@ public class ApiImportMojo extends BaseDocsGeneratorMojo {
         HttpRequest httpRequest = HttpUtil.createPost(authCenterApi).addHeaders(headers);
         log.info("env => {}", JsonUtil.toPrettyJson(env));
         for (ApiInfo apiInfo : apiInfoList) {
+            //这里使用服务描述
+            apiInfo.setServiceName(apiInfo.getServiceRemark());
             String body = JsonUtil.toPrettyJson(apiInfo);
             log.info("body data => {}", body);
             httpRequest.body(JSONUtil.toJsonStr(apiInfo));

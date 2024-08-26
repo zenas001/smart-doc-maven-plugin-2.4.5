@@ -29,8 +29,13 @@
                     <#assign  to=to+matchChinese(s?number) />
                 </#if>
             </#if>
+            <!--第二位-->
             <#if i==1>
-                <#if s?number== 0>
+                <#if to==level[0] && s?number == 0>
+                    <#return to?trim/>
+                <#elseif to==level[0]>
+                    <#return to+matchChinese(s?number)?trim>
+                <#elseif s?number == 0>
                     <#assign to=to+level[0] />
                 <#else>
                     <#assign to=to+level[0] />
@@ -61,4 +66,4 @@
         <#return chinese['chinese']/>
     </#list>
 </#function>
-<#--<number>${seqNumToChinese(109)}</number>-->
+<#--<number>${seqNumToChinese(20)}</number>-->

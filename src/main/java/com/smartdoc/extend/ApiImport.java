@@ -21,6 +21,12 @@ public class ApiImport {
     private String appCode = "C07";
 
     /**
+     * module
+     * 模块
+     */
+    private String module;
+
+    /**
      * serviceCode
      * default: B02
      */
@@ -43,9 +49,9 @@ public class ApiImport {
     private String version;
 
     /**
-     * controller name
+     * java class  name
      */
-    private String controller;
+    private String className;
     /**
      * methods list split ","
      */
@@ -107,12 +113,12 @@ public class ApiImport {
         this.version = version;
     }
 
-    public String getController() {
-        return controller;
+    public String getClassName() {
+        return className;
     }
 
-    public void setController(String controller) {
-        this.controller = controller;
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getMethods() {
@@ -121,5 +127,13 @@ public class ApiImport {
 
     public void setMethods(String methods) {
         this.methods = methods;
+    }
+
+    public String getModule() {
+        return module;
+    }
+
+    public void setModule(String module) {
+        this.module = module;
     }
 }

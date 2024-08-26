@@ -18,13 +18,28 @@ public class ApiExtendConfig extends ApiConfig {
     private String importEnvFile;
 
     /**
-     * controller controller
+     * java class file name
      */
-    private List<ApiImport> importControllers;
+    private List<ApiImport> apiList;
 
     /************************ out api word doc ****************************/
 
+
+
+    /**
+     * out doc template path
+     **/
+    private String docTemplatePath;
+
+    /**
+     * @deprecated remove
+     */
     private String interfaceNameSpace;
+
+    /**
+     * out doc file business module name
+     */
+    private String outDocBusinessModuleName;
     /**
      * out doc file name
      */
@@ -34,13 +49,22 @@ public class ApiExtendConfig extends ApiConfig {
      */
     private String outDocDir;
 
+    /**
+     * it's out api order doc
+     */
+    private boolean isOutApiOrderDoc=false;
+    /**
+     * it's out c70 interface doc
+     */
+    private boolean isOutC70Doc=false;
 
-    public List<ApiImport> getImportControllers() {
-        return importControllers;
+
+    public List<ApiImport> getApiList() {
+        return apiList;
     }
 
-    public void setImportControllers(List<ApiImport> importControllers) {
-        this.importControllers = importControllers;
+    public void setApiList(List<ApiImport> apiList) {
+        this.apiList = apiList;
     }
 
     public String getImportEnv() {
@@ -57,6 +81,22 @@ public class ApiExtendConfig extends ApiConfig {
 
     public void setImportEnvFile(String importEnvFile) {
         this.importEnvFile = importEnvFile;
+    }
+
+    public String getOutDocBusinessModuleName() {
+        return outDocBusinessModuleName;
+    }
+
+    public String getDocTemplatePath() {
+        return docTemplatePath;
+    }
+
+    public void setDocTemplatePath(String docTemplatePath) {
+        this.docTemplatePath = docTemplatePath;
+    }
+
+    public void setOutDocBusinessModuleName(String outDocBusinessModuleName) {
+        this.outDocBusinessModuleName = outDocBusinessModuleName;
     }
 
     public String getOutDocFileName() {
@@ -81,5 +121,21 @@ public class ApiExtendConfig extends ApiConfig {
 
     public void setInterfaceNameSpace(String interfaceNameSpace) {
         this.interfaceNameSpace = interfaceNameSpace;
+    }
+
+    public boolean isOutApiOrderDoc() {
+        return isOutApiOrderDoc;
+    }
+
+    public void setOutApiOrderDoc(boolean outApiOrderDoc) {
+        isOutApiOrderDoc = outApiOrderDoc;
+    }
+
+    public boolean isOutC70Doc() {
+        return isOutC70Doc;
+    }
+
+    public void setOutC70Doc(boolean outC70Doc) {
+        isOutC70Doc = outC70Doc;
     }
 }

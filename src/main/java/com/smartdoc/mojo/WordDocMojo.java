@@ -24,6 +24,7 @@ package com.smartdoc.mojo;
 
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HtmlUtil;
 import cn.hutool.http.Method;
 import com.power.doc.builder.ProjectDocConfigBuilder;
@@ -49,6 +50,7 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,50 +71,97 @@ import static cn.hutool.core.text.StrPool.HTML_QUOTE;
 @Execute(phase = LifecyclePhase.COMPILE)
 @Mojo(name = MojoConstants.WORD_DOC, requiresDependencyResolution = ResolutionScope.COMPILE)
 public class WordDocMojo extends BaseDocsGeneratorMojo {
-    private static final List<String> TEXT = Arrays.asList(HTML_NBSP, HTML_AMP, HTML_QUOTE, HTML_APOS, HTML_LT, HTML_GT);
-
+    private static final List<String> TEXT = Arrays.asList(HTML_NBSP, HTML_AMP, HTML_QUOTE, HTML_APOS, HTML_LT,
+            HTML_GT);
     private String nameSpace;
+
 
     @Override
     public void executeMojo(ApiExtendConfig apiConfig, JavaProjectBuilder javaProjectBuilder) throws MojoExecutionException, MojoFailureException {
         ProjectDocConfigBuilder configBuilder = new ProjectDocConfigBuilder(apiConfig, javaProjectBuilder);
+        //add  ignore field
         IDocBuildTemplate<ApiDoc> docBuildTemplate = BuildTemplateFactory.getDocBuildTemplate("spring");
-        //get target controller
-        if (apiConfig.getImportControllers().size() > 1) {
-            throw new MojoFailureException("You currently can only use one import controller");
-        }
         List<ApiImport> controllers = ExtendUtils.getTargetApiList(apiConfig);
         if (controllers != null && !controllers.isEmpty()) {
             List<ApiInfo> apiInfoList = new ArrayList<>();
             //get call remote api auth params
-            //controllerMap
-            Map<String, ApiImport> controllerMap = controllers.stream().collect(Collectors.toMap(ApiImport::getController, Function.identity()));
-            //get scan controller api doc info
-            Map<String, ApiDoc> apiDocMap = docBuildTemplate.getApiData(configBuilder).stream().collect(Collectors.toMap(ApiDoc::getName,
-                    Function.identity()));
-            //get controller class,只扫描controller
-            Map<String, JavaClass> apiClassMap =
-                    configBuilder.getJavaProjectBuilder().getClasses().stream()
-                            .filter(javaClass -> javaClass.getName().contains("Controller"))
-                            .collect(Collectors.toMap(JavaClass::getName, Function.identity()));
-            controllerMap.forEach((name, apiImport) -> apiInfoList.addAll(ExtendUtils.getApiParetamList(apiImport, apiDocMap.get(name),
-                    apiClassMap.get(name))));
-            getLog().info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>api info:" + JsonUtil.toPrettyJson(apiInfoList));
+            //filter class Map
+            Map<String, ApiImport> filterClassMap =
+                    controllers.stream().collect(Collectors.toMap(ApiImport::getClassName, Function.identity()));
+            //api doc  template eg. include controller and feign client
+            Map<String, ApiDoc> apiDocMap =
+                    docBuildTemplate.getApiData(configBuilder).stream().collect(Collectors.toMap(ApiDoc::getName,
+                            Function.identity()));
+            //get controller class with job class and consumer class
+            Map<String, JavaClass> scanClassMap = ExtendUtils.getJavaClassMap(configBuilder);
+            getLog().debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>scan discover all javaClass:" + String.join(
+                    ",", scanClassMap.keySet()));
+            getLog().debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>filter all javaClass:" + String.join(
+                    ",", filterClassMap.keySet()));
+            //get include controller and feign client class
+            filterClassMap.forEach((name, apiImport) -> {
+                if (name.endsWith(ExtendUtils.CLASS_TYPE.CONTROLLER.getApiSuffix())) {
+                    //controller
+                    apiInfoList.addAll(ExtendUtils.getApiInfoList(apiImport,
+                            apiDocMap.get(name),
+                            scanClassMap.get(name)));
+                } else if (name.endsWith(ExtendUtils.CLASS_TYPE.JOB.getApiSuffix()) || name.endsWith(ExtendUtils.CLASS_TYPE.CONSUMER.getApiSuffix())) {
+                    //job and consumer
+                    apiInfoList.addAll(ExtendUtils.getApiInfoList(apiImport, scanClassMap.get(name)));
+                }
+
+            });
+            String apis = apiInfoList.stream().map(ApiInfo::getServiceName).collect(Collectors.joining(","));
+            getLog().info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>api info:" + apis);
             if (CollUtil.isEmpty(apiInfoList)) {
                 throw new MojoExecutionException("apiList is empty!");
             }
-            this.nameSpace = apiConfig.getInterfaceNameSpace();
-            //generate doc
-            Map<String, Object> dataModel = toDataModel(apiInfoList);
+            //generate doc  by service name re sort
+            Map<String, Object> dataModel =
+                    toDataModel(apiInfoList.stream().sorted(Comparator.comparing((a) -> a.getApiType().equals(ExtendUtils.CLASS_TYPE.CONTROLLER) || a.getApiType().equals(ExtendUtils.CLASS_TYPE.JOB))).collect(Collectors.toList()));
+            if (apiConfig.getOutDocBusinessModuleName() != null) {
+                dataModel.put("outDocBusinessModuleName", apiConfig.getOutDocBusinessModuleName());
+            }
             getLog().debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>dataModel:" + JsonUtil.toPrettyJson(dataModel));
-            TemplateTool.generateImportTemplate(dataModel,"template.ftl", apiConfig.getOutDocDir(),
+            //因为当前这里支持单服务故取一个,根据appCode和服务类型取接口网关前缀
+            ApiInfo apiImport = apiInfoList.get(0);
+            //生成接口清单全量录入信息
+            dataModel.put("app_code", apiImport.getAppCode());
+            dataModel.put("service_code", apiImport.getServiceCode());
+            dataModel.put("platform", apiImport.getPlatform());
+            dataModel.put("type", apiImport.getModule());
+            dataModel.put("prefix", apiImport.getServiceApiPrefix());
+            //TODO 配置化模板路径对外暴露
+
+            //生成技术文档
+            TemplateTool.generateImportTemplate(dataModel, "template.ftl", apiConfig.getOutDocDir(),
                     TemplateTool.DOC_SUFFIX,
                     apiConfig.getOutDocFileName());
+            //生成接口清单全量文档
+            if (apiConfig.isOutApiOrderDoc()) {
+                TemplateTool.generateImportTemplate(dataModel, "allInterfaceOrderTemplate.ftl",
+                        apiConfig.getOutDocDir(),
+                        TemplateTool.XLS_SUFFIX,
+                        apiConfig.getOutDocFileName().concat("接口清单全量"));
+            }
+            //生成具体调用平台信息权限文档
+            if (apiConfig.isOutC70Doc()) {
+                TemplateTool.generateImportTemplate(dataModel, "C70InterfaceTemplate.ftl", apiConfig.getOutDocDir(),
+                        TemplateTool.XLS_SUFFIX,
+                        apiConfig.getOutDocFileName().concat(apiImport.getAppCode()));
+            }
+
         }
 
     }
 
 
+    /**
+     * 将API信息列表转换为数据模型
+     *
+     * @param apiInfoList API信息列表
+     * @return 包含服务信息列表的数据模型
+     */
     private Map<String, Object> toDataModel(List<ApiInfo> apiInfoList) {
         Map<String, List<ApiInfo>> serviceMap = new HashMap<>();
         for (ApiInfo apiInfo : apiInfoList) {
@@ -135,18 +184,38 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
         return dataModel;
     }
 
+    /**
+     * 从给定的Map.Entry<String, List<ApiInfo>>中获取ServiceInfo对象
+     *
+     * @param entry 包含API信息的Map.Entry对象，其中键为字符串类型，值为ApiInfo列表
+     * @param key   用于替换后缀Controller为Interface的字符串
+     * @return 返回包含服务信息的ServiceInfo对象
+     */
     private ServiceInfo getServiceInfo(Map.Entry<String, List<ApiInfo>> entry, String key) {
         List<ApiInfo> apiInfos = entry.getValue();
-        //替换后缀Controller为Interface
-        String serviceName = key.replace("Controller", "Interface");
-        String accessUrl = String.join("/", "http://xxx.xxx", apiInfos.get(0).getModule());
-        ServiceInfo serviceInfo = new ServiceInfo(serviceName, apiInfos.get(0).getServiceName(), key,
-                nameSpace + "." + serviceName, accessUrl);
+        //这里module为controller 接口地址
+        ApiInfo apiInfo = apiInfos.get(0);
+        //替换后缀controller为service
+        String controller = ExtendUtils.CLASS_TYPE.CONTROLLER.getApiSuffix();
+        String service=ExtendUtils.CLASS_TYPE.SERVICE.getApiSuffix();
+        String serviceName = apiInfo.getServiceName().replace(controller, service);
+        String nameSpace = StrUtil.replaceIgnoreCase(apiInfo.getNameSpace(), controller, service.toLowerCase());
+        String serviceApi = apiInfo.getServiceApi();
+        String accessUrl = StrUtil.isAllNotBlank(serviceApi) ? String.join("/", "https://xxx.xxx", serviceApi) : "无。";
+        //命名空间
+        ServiceInfo serviceInfo = new ServiceInfo(key, serviceName, key,
+                nameSpace, accessUrl, apiInfo.getServiceApiPrefix(), serviceApi);
         List<ServiceMethod> serviceMethodList = getServiceMethods(apiInfos);
         serviceInfo.setMethodDetails(serviceMethodList);
         return serviceInfo;
     }
 
+    /**
+     * 从给定的ApiInfo列表中获取服务方法列表。
+     *
+     * @param apiInfos ApiInfo对象的列表，包含API的详细信息
+     * @return 包含服务方法的List<ServiceMethod>列表
+     */
     private static List<ServiceMethod> getServiceMethods(List<ApiInfo> apiInfos) {
         List<ServiceMethod> serviceMethodList = new ArrayList<>();
         for (int i = 0; i < apiInfos.size(); i++) {
@@ -154,6 +223,8 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
             ApiInfo apiInfo = apiInfos.get(i);
             //这里编号比当前下标+1
             serviceMethod.setNo(i + 1);
+            //http请求方式
+            serviceMethod.setHttpMethod(apiInfo.getMethod());
             serviceMethod.setMethodName(apiInfo.getMethodName());
             serviceMethod.setMethodRemark(apiInfo.getMethodRemark());
             serviceMethod.setVersion(apiInfo.getVersion());
@@ -175,6 +246,12 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
         return serviceMethodList;
     }
 
+    /**
+     * 在渲染doc之前预处理API相关的参数数据
+     *
+     * @param apiParams 需要预处理的API参数列表
+     * @return 预处理后的API参数列表
+     */
     //在渲染doc之前预处理api相关数据
     private static List<ApiParam> preHandleApiParams(List<ApiParam> apiParams) {
         List<ApiParam> list = new ArrayList<>();
@@ -199,7 +276,7 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
     private static String unescape(String input) {
         String text = HtmlUtil.cleanHtmlTag(input);
         for (String htmlEscape : TEXT) {
-            text = text.replace(htmlEscape, "");
+            text = text.replace(htmlEscape, "").replace("└─", "");
         }
         return text;
     }
@@ -207,12 +284,28 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
 
     //服务接口清单
     public static class ServiceInfo {
-        public ServiceInfo(String title, String interfaceName, String description, String nameSpace, String accessUrl) {
+        /**
+         * 创建一个ServiceInfo对象，用于存储服务信息。
+         *
+         * @param title            服务标题
+         * @param interfaceName    接口名称
+         * @param description      服务描述
+         * @param nameSpace        命名空间
+         * @param accessUrl        访问URL
+         * @param serviceApiPrefix 服务API前缀
+         * @param serviceApi       服务API
+         */
+
+        public ServiceInfo(String title, String interfaceName, String description, String nameSpace, String accessUrl
+                , String serviceApiPrefix,
+                           String serviceApi) {
             this.title = title;
             this.interfaceName = interfaceName;
             this.description = description;
             this.nameSpace = nameSpace;
             this.accessUrl = accessUrl;
+            this.serviceApiPrefix = serviceApiPrefix;
+            this.serviceApi = serviceApi;
         }
 
         //标题
@@ -223,7 +316,11 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
         private String description;
         //命名空间
         private String nameSpace;
-        //访问路径
+        //接口服务网关前缀
+        private String serviceApiPrefix;
+        //接口路径
+        private String serviceApi;
+        //访问=http://xxx.xxx/+接口路径
         private String accessUrl;
         //服务接口清单表格
         private List<ServiceMethod> methodDetails;
@@ -275,12 +372,22 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
         public void setMethodDetails(List<ServiceMethod> methodDetails) {
             this.methodDetails = methodDetails;
         }
+
+        public String getServiceApi() {
+            return serviceApi;
+        }
+
+        public void setServiceApi(String serviceApi) {
+            this.serviceApi = serviceApi;
+        }
     }
 
     //服务接口清单表格信息
     public static class ServiceMethod {
         //服务编号
         private Integer no;
+        //http 请求类型
+        private String httpMethod;
         //方法名
         private String methodName;
         //方法描述
@@ -368,6 +475,14 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
 
         public void setImplLogic(String implLogic) {
             this.implLogic = implLogic;
+        }
+
+        public String getHttpMethod() {
+            return httpMethod;
+        }
+
+        public void setHttpMethod(String httpMethod) {
+            this.httpMethod = httpMethod;
         }
     }
 

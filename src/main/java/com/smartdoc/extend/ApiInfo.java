@@ -1,6 +1,7 @@
 package com.smartdoc.extend;
 
 import com.power.doc.model.ApiParam;
+import com.smartdoc.util.ExtendUtils;
 
 import java.util.List;
 
@@ -10,12 +11,20 @@ import java.util.List;
 public class ApiInfo {
     private String serviceCode = "B02";
     /**
-     * http method
+     * method
      */
     private String method;
-    private String prefix;
+    /**
+     * api type
+     */
+    private ExtendUtils.CLASS_TYPE apiType;
     private String author;
-    private String module;
+    /**
+     * new
+     */
+    private String nameSpace;
+    private String serviceApiPrefix;
+    private String serviceApi;
     private String serviceName;
     private String serviceRemark;
     private String methodName;
@@ -38,6 +47,8 @@ public class ApiInfo {
      * http response params
      */
     private List<ApiParam> responseParams;
+    private String platform;
+    private String module;
     private String remark;
     private String appCode;
     private String version;
@@ -48,12 +59,15 @@ public class ApiInfo {
     private int authType = 1;
 
 
-    public ApiInfo(String prefix, String appCode, String serviceName, String version, int authType) {
-        this.prefix = prefix;
+    public ApiInfo(String serviceApiPrefix, String appCode, String serviceName, String version, int authType,
+                   String module, String platform) {
+        this.serviceApiPrefix = serviceApiPrefix;
         this.appCode = appCode;
         this.serviceName = serviceName;
         this.version = version;
         this.authType = authType;
+        this.module = module;
+        this.platform = platform;
     }
 
     public String getServiceCode() {
@@ -64,12 +78,12 @@ public class ApiInfo {
         this.serviceCode = serviceCode;
     }
 
-    public String getPrefix() {
-        return prefix;
+    public String getServiceApiPrefix() {
+        return serviceApiPrefix;
     }
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
+    public void setServiceApiPrefix(String serviceApiPrefix) {
+        this.serviceApiPrefix = serviceApiPrefix;
     }
 
     public String getAuthor() {
@@ -80,12 +94,12 @@ public class ApiInfo {
         this.author = author;
     }
 
-    public String getModule() {
-        return module;
+    public String getServiceApi() {
+        return serviceApi;
     }
 
-    public void setModule(String module) {
-        this.module = module;
+    public void setServiceApi(String serviceApi) {
+        this.serviceApi = serviceApi;
     }
 
     public String getServiceRemark() {
@@ -138,7 +152,7 @@ public class ApiInfo {
     }
 
     public void setPath(String path) {
-        this.path = this.prefix.concat(path);
+        this.path = this.serviceApiPrefix.concat(path);
     }
 
     public int getDisableFlag() {
@@ -223,5 +237,37 @@ public class ApiInfo {
 
     public void setMethod(String method) {
         this.method = method;
+    }
+
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public String getModule() {
+        return module;
+    }
+
+    public void setModule(String module) {
+        this.module = module;
+    }
+
+    public ExtendUtils.CLASS_TYPE getApiType() {
+        return apiType;
+    }
+
+    public void setApiType(ExtendUtils.CLASS_TYPE apiType) {
+        this.apiType = apiType;
+    }
+
+    public String getNameSpace() {
+        return nameSpace;
+    }
+
+    public void setNameSpace(String nameSpace) {
+        this.nameSpace = nameSpace;
     }
 }
