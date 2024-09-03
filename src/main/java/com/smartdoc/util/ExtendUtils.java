@@ -1,6 +1,8 @@
 package com.smartdoc.util;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.text.StrPool;
+import cn.hutool.core.util.StrUtil;
 import com.power.common.util.StringUtil;
 import com.power.doc.builder.ProjectDocConfigBuilder;
 import com.power.doc.constants.DocAnnotationConstants;
@@ -54,16 +56,18 @@ public class ExtendUtils {
      * api type
      */
     public enum CLASS_TYPE {
-        CONTROLLER("Controller", "【接口】"),
-        JOB("Job", "【定时任务】"),
-        SERVICE("Service", "【业务服务】"),
-        CONSUMER("Consumer", "【消费队列】");
+        CONTROLLER("Controller", "【接口】","服务使用HTTP协议，通过华为封装Spring CloudFeign进行服务注册发现。"),
+        JOB("Job", "【定时任务】","使用xxlJob 使用HTTP协议调度"),
+        SERVICE("Service", "【业务服务】","内部代码依赖调用"),
+        CONSUMER("Consumer", "【消费队列】","RocketMq消息通知消费");
         private String apiSuffix;
         private String titlePrefix;
+        private String desc;
 
-        CLASS_TYPE(String apiSuffix, String titlePrefix) {
+        CLASS_TYPE(String apiSuffix, String titlePrefix, String desc) {
             this.apiSuffix = apiSuffix;
             this.titlePrefix = titlePrefix;
+            this.desc = desc;
         }
 
         public String getApiSuffix() {
@@ -80,6 +84,14 @@ public class ExtendUtils {
 
         public void setTitlePrefix(String titlePrefix) {
             this.titlePrefix = titlePrefix;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public void setDesc(String desc) {
+            this.desc = desc;
         }
     }
 
@@ -105,16 +117,25 @@ public class ExtendUtils {
                 Arrays.stream(CLASS_TYPE.values()).map(CLASS_TYPE::getApiSuffix).collect(Collectors.toList());
         //get api type
         return configBuilder.getJavaProjectBuilder().getClasses().stream()
-                .filter(javaClass -> javaClass.getName().endsWith(apiTypeList.get(0)) || javaClass.getName().endsWith(apiTypeList.get(1)) || javaClass.getName().endsWith(apiTypeList.get(2)))
+                .filter(javaClass -> {
+                    for (String suffix : apiTypeList) {
+                        if (javaClass.getName().endsWith(suffix)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
                 .collect(Collectors.toMap(JavaClass::getName, Function.identity()));
     }
 
     /**
-     * @param apiDoc    controller and feign client doc
-     * @param apiImport apiImport info
-     * @param javaClass java class
+     * @param apiDoc            controller and feign client doc
+     * @param apiImport         apiImport info
+     * @param javaClass         java class
+     * @param childrenClassList children java class List
      */
-    public static List<ApiInfo> getApiInfoList(ApiImport apiImport, ApiDoc apiDoc, JavaClass javaClass) {
+    public static List<ApiInfo> getApiInfoList(ApiImport apiImport, ApiDoc apiDoc, JavaClass javaClass,
+                                               JavaClass... childrenClassList) {
         List<ApiInfo> apiInfoList = new ArrayList<>();
         Map<String, ApiMethodDoc> methodDocMap =
                 apiDoc.getList().stream().collect(Collectors.toMap(ApiMethodDoc::getName, Function.identity()));
@@ -122,6 +143,7 @@ public class ExtendUtils {
         String module = getModule(javaClass);
         String methods = apiImport.getMethods();
         String nameSpace = javaClass.getPackageName();
+
         if (StringUtils.isNotBlank(methods)) {
             if (methods.equals(ALL)) {
                 for (Map.Entry<String, ApiMethodDoc> stringApiMethodDocEntry : methodDocMap.entrySet()) {
@@ -142,6 +164,22 @@ public class ExtendUtils {
                 ApiMethodDoc apiMethodDoc = methodDocMap.get(methods);
                 if (apiMethodDoc != null) {
                     apiInfoList.add(generateApiParam(apiImport, apiDoc, apiMethodDoc, nameSpace, module));
+                }
+            }
+        }
+        String serviceRemark = apiInfoList.get(0).getServiceRemark();
+        //children add other class method to
+        List<ApiImport> chidrenList = apiImport.getChildrenList();
+        if (CollUtil.isNotEmpty(chidrenList) && childrenClassList != null && StrUtil.isAllNotBlank(serviceRemark) && chidrenList.size() == childrenClassList.length) {
+            for (int i = 0; i < chidrenList.size(); i++) {
+                ApiImport childrenApiImport = chidrenList.get(i);
+                String name = childrenApiImport.getClassName();
+                if (name.endsWith(ExtendUtils.CLASS_TYPE.JOB.getApiSuffix()) || name.endsWith(ExtendUtils.CLASS_TYPE.CONSUMER.getApiSuffix())) {
+                    //it's job class or consumer class
+                    List<ApiInfo> childrenList = getApiInfoList(childrenApiImport, childrenClassList[i]);
+                    for (ApiInfo childrenApiInfo : childrenList) {
+                        apiInfoList.add(childrenApiInfo);
+                    }
                 }
             }
         }
@@ -205,7 +243,12 @@ public class ExtendUtils {
                 apiImport.getVersion(),
                 1, apiImport.getModule(), apiImport.getPlatform());
         //by java class comment get author
-        String classAuthor = JavaClassUtil.getClassTagsValue(javaClass, DocTags.AUTHOR, Boolean.TRUE);
+        String classAuthor = null;
+        try {
+            classAuthor = JavaClassUtil.getClassTagsValue(javaClass, DocTags.AUTHOR, Boolean.TRUE);
+        } catch (Exception e) {
+            log.warn("get class author:", e);
+        }
         //by javaClass get desc
         String desc = DocUtil.getEscapeAndCleanComment(javaClass.getComment());
         apiInfo.setAuthor(StringUtils.isNotBlank(apiImport.getAuthor()) ? apiImport.getAuthor() : classAuthor);

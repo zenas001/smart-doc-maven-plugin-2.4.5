@@ -649,7 +649,7 @@
                             <w:tc>
                                 <w:tcPr>
                                     <w:tcW w:w="1350" w:type="dxa"/>
-                                    <w:shd w:val="clear" w:color="auto" w:fill="C4BC96" w:themeFill="background2" w:themeFillShade="BF"/>
+                                    <w:shd w:val="clear" w:color="auto" w:fill="AEAAAA" />
                                 </w:tcPr>
                                 <w:p w14:paraId="162838DE" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
                                     <w:pPr>
@@ -666,7 +666,7 @@
                             <w:tc>
                                 <w:tcPr>
                                     <w:tcW w:w="1304" w:type="dxa"/>
-                                    <w:shd w:val="clear" w:color="auto" w:fill="C4BC96" w:themeFill="background2" w:themeFillShade="BF"/>
+                                    <w:shd w:val="clear" w:color="auto" w:fill="AEAAAA" />
                                 </w:tcPr>
                                 <w:p w14:paraId="201A58F8" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
                                     <w:pPr>
@@ -683,7 +683,7 @@
                             <w:tc>
                                 <w:tcPr>
                                     <w:tcW w:w="3287" w:type="dxa"/>
-                                    <w:shd w:val="clear" w:color="auto" w:fill="C4BC96" w:themeFill="background2" w:themeFillShade="BF"/>
+                                    <w:shd w:val="clear" w:color="auto" w:fill="AEAAAA" />
                                 </w:tcPr>
                                 <w:p w14:paraId="2DD3DE0A" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
                                     <w:pPr>
@@ -700,7 +700,7 @@
                             <w:tc>
                                 <w:tcPr>
                                     <w:tcW w:w="1059" w:type="dxa"/>
-                                    <w:shd w:val="clear" w:color="auto" w:fill="C4BC96" w:themeFill="background2" w:themeFillShade="BF"/>
+                                    <w:shd w:val="clear" w:color="auto" w:fill="AEAAAA" />
                                 </w:tcPr>
                                 <w:p w14:paraId="33F9E519" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
                                     <w:pPr>
@@ -786,7 +786,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>无。</w:t>
+                                        <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                                     </w:r>
                                 </w:p>
                             </w:tc>
@@ -1881,7 +1881,7 @@
                                             <w:rStyle w:val="af6"/>
                                             <w:noProof/>
                                         </w:rPr>
-                                        <w:t>概念模型</w:t>
+                                        <w:t>数据总体结构</w:t>
                                     </w:r>
                                     <w:r>
                                         <w:rPr>
@@ -1963,7 +1963,7 @@
                                             <w:rFonts w:eastAsia="等线" w:cs="Arial"/>
                                             <w:noProof/>
                                         </w:rPr>
-                                        <w:t>全局数据权限处理逻辑</w:t>
+                                        <w:t>数据库设计</w:t>
                                     </w:r>
                                     <w:r>
                                         <w:rPr>
@@ -2043,7 +2043,7 @@
                                             <w:rStyle w:val="af6"/>
                                             <w:noProof/>
                                         </w:rPr>
-                                        <w:t>数据清理以及归档</w:t>
+                                        <w:t>数据清洗</w:t>
                                     </w:r>
                                     <w:r>
                                         <w:rPr>
@@ -2079,486 +2079,6 @@
                                             <w:noProof/>
                                         </w:rPr>
                                         <w:t>3</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="end"/>
-                                    </w:r>
-                                </w:hyperlink>
-                            </w:p>
-                            <#assign number=number+1/>
-                            <w:p w14:paraId="7770FE75" w14:textId="50B198A7" w:rsidR="00A71A63" w:rsidRDefault="00A71A63">
-                                <w:pPr>
-                                    <w:pStyle w:val="TOC2"/>
-                                    <w:tabs>
-                                        <w:tab w:val="left" w:pos="1260"/>
-                                        <w:tab w:val="right" w:leader="dot" w:pos="8296"/>
-                                    </w:tabs>
-                                    <w:rPr>
-                                        <w:noProof/>
-                                        <w:szCs w:val="22"/>
-                                        <w14:ligatures w14:val="standardContextual"/>
-                                    </w:rPr>
-                                </w:pPr>
-                                <w:hyperlink w:anchor="_Toc${number}" w:history="1">
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>5.4</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                            <w:szCs w:val="22"/>
-                                            <w14:ligatures w14:val="standardContextual"/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>数据安全</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="begin"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:instrText xml:space="preserve"> PAGEREF _Toc${number} \h </w:instrText>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="separate"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>3</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="end"/>
-                                    </w:r>
-                                </w:hyperlink>
-                            </w:p>
-                            <#assign number=number+1/>
-                            <w:p w14:paraId="44DEBF32" w14:textId="4A235533" w:rsidR="00A71A63" w:rsidRDefault="00A71A63">
-                                <w:pPr>
-                                    <w:pStyle w:val="TOC2"/>
-                                    <w:tabs>
-                                        <w:tab w:val="left" w:pos="1260"/>
-                                        <w:tab w:val="right" w:leader="dot" w:pos="8296"/>
-                                    </w:tabs>
-                                    <w:rPr>
-                                        <w:noProof/>
-                                        <w:szCs w:val="22"/>
-                                        <w14:ligatures w14:val="standardContextual"/>
-                                    </w:rPr>
-                                </w:pPr>
-                                <w:hyperlink w:anchor="_Toc${number}" w:history="1">
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>5.5</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                            <w:szCs w:val="22"/>
-                                            <w14:ligatures w14:val="standardContextual"/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>缓存容量</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="begin"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:instrText xml:space="preserve"> PAGEREF _Toc${number} \h </w:instrText>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="separate"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>3</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="end"/>
-                                    </w:r>
-                                </w:hyperlink>
-                            </w:p>
-                            <#assign number=number+1/>
-                            <w:p w14:paraId="3059C233" w14:textId="374C29C6" w:rsidR="00A71A63" w:rsidRDefault="00A71A63">
-                                <w:pPr>
-                                    <w:pStyle w:val="TOC2"/>
-                                    <w:tabs>
-                                        <w:tab w:val="left" w:pos="1260"/>
-                                        <w:tab w:val="right" w:leader="dot" w:pos="8296"/>
-                                    </w:tabs>
-                                    <w:rPr>
-                                        <w:noProof/>
-                                        <w:szCs w:val="22"/>
-                                        <w14:ligatures w14:val="standardContextual"/>
-                                    </w:rPr>
-                                </w:pPr>
-                                <w:hyperlink w:anchor="_Toc${number}" w:history="1">
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>5.6</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                            <w:szCs w:val="22"/>
-                                            <w14:ligatures w14:val="standardContextual"/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>码值</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="begin"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:instrText xml:space="preserve"> PAGEREF _Toc${number} \h </w:instrText>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="separate"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>3</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="end"/>
-                                    </w:r>
-                                </w:hyperlink>
-                            </w:p>
-                            <#assign number=number+1/>
-                            <w:p w14:paraId="7E7BDA9E" w14:textId="1F1B640E" w:rsidR="00A71A63" w:rsidRDefault="00A71A63">
-                                <w:pPr>
-                                    <w:pStyle w:val="TOC2"/>
-                                    <w:tabs>
-                                        <w:tab w:val="left" w:pos="1260"/>
-                                        <w:tab w:val="right" w:leader="dot" w:pos="8296"/>
-                                    </w:tabs>
-                                    <w:rPr>
-                                        <w:noProof/>
-                                        <w:szCs w:val="22"/>
-                                        <w14:ligatures w14:val="standardContextual"/>
-                                    </w:rPr>
-                                </w:pPr>
-                                <w:hyperlink w:anchor="_Toc${number}" w:history="1">
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>5.7</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                            <w:szCs w:val="22"/>
-                                            <w14:ligatures w14:val="standardContextual"/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>异常</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="begin"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:instrText xml:space="preserve"> PAGEREF _Toc${number} \h </w:instrText>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="separate"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>3</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="end"/>
-                                    </w:r>
-                                </w:hyperlink>
-                            </w:p>
-                            <#assign number=number+1/>
-                            <w:p w14:paraId="707ED329" w14:textId="4CD8D7E7" w:rsidR="00A71A63" w:rsidRDefault="00A71A63">
-                                <w:pPr>
-                                    <w:pStyle w:val="TOC2"/>
-                                    <w:tabs>
-                                        <w:tab w:val="left" w:pos="1260"/>
-                                        <w:tab w:val="right" w:leader="dot" w:pos="8296"/>
-                                    </w:tabs>
-                                    <w:rPr>
-                                        <w:noProof/>
-                                        <w:szCs w:val="22"/>
-                                        <w14:ligatures w14:val="standardContextual"/>
-                                    </w:rPr>
-                                </w:pPr>
-                                <w:hyperlink w:anchor="_Toc${number}" w:history="1">
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>5.8</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                            <w:szCs w:val="22"/>
-                                            <w14:ligatures w14:val="standardContextual"/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>定时任务配置</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="begin"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:instrText xml:space="preserve"> PAGEREF _Toc${number} \h </w:instrText>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="separate"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>3</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="end"/>
-                                    </w:r>
-                                </w:hyperlink>
-                            </w:p>
-                            <#assign number=number+1/>
-                            <w:p w14:paraId="4C77BE29" w14:textId="6CC86D6D" w:rsidR="00A71A63" w:rsidRDefault="00A71A63">
-                                <w:pPr>
-                                    <w:pStyle w:val="TOC2"/>
-                                    <w:tabs>
-                                        <w:tab w:val="left" w:pos="1260"/>
-                                        <w:tab w:val="right" w:leader="dot" w:pos="8296"/>
-                                    </w:tabs>
-                                    <w:rPr>
-                                        <w:noProof/>
-                                        <w:szCs w:val="22"/>
-                                        <w14:ligatures w14:val="standardContextual"/>
-                                    </w:rPr>
-                                </w:pPr>
-                                <w:hyperlink w:anchor="_Toc${number}" w:history="1">
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>5.9</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                            <w:szCs w:val="22"/>
-                                            <w14:ligatures w14:val="standardContextual"/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r w:rsidRPr="00076DB3">
-                                        <w:rPr>
-                                            <w:rStyle w:val="af6"/>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>线程池设计</w:t>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:tab/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="begin"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:instrText xml:space="preserve"> PAGEREF _Toc${number} \h </w:instrText>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:fldChar w:fldCharType="separate"/>
-                                    </w:r>
-                                    <w:r>
-                                        <w:rPr>
-                                            <w:noProof/>
-                                        </w:rPr>
-                                        <w:t>4</w:t>
                                     </w:r>
                                     <w:r>
                                         <w:rPr>
@@ -3061,7 +2581,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="42A5ED4D" w14:textId="6EB4835B" w:rsidR="008D2D99" w:rsidRDefault="00360CEF" w:rsidP="008D2D99">
@@ -3105,7 +2625,7 @@
                                 <w:rPr>
                                     <w:rFonts w:hint="eastAsia"/>
                                 </w:rPr>
-                                <w:t>&#160;&#160;&#160;&#160;服务类名:</w:t>
+                                <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;服务类名:</w:t>
                             </w:r>
                             <w:proofErr w:type="spellStart"/>
                             <w:r>
@@ -3121,7 +2641,7 @@
                                 <w:rPr>
                                     <w:rFonts w:hint="eastAsia"/>
                                 </w:rPr>
-                                <w:t>&#160;&#160;&#160;&#160;功能概述：${service.description}</w:t>
+                                <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;功能概述：${service.description}</w:t>
                             </w:r>
                         </w:p>
                         <w:p w14:paraId="3DD318ED" w14:textId="77777777" w:rsidR="00B243FF" w:rsidRDefault="00B243FF" w:rsidP="00B243FF">
@@ -3129,7 +2649,7 @@
                                 <w:rPr>
                                     <w:rFonts w:hint="eastAsia"/>
                                 </w:rPr>
-                                <w:t>&#160;&#160;&#160;&#160;命名空间：</w:t>
+                                <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;命名空间：</w:t>
                             </w:r>
                             <w:proofErr w:type="spellStart"/>
                             <w:proofErr w:type="gramStart"/>
@@ -3150,7 +2670,7 @@
                                 <w:rPr>
                                     <w:rFonts w:hint="eastAsia"/>
                                 </w:rPr>
-                                <w:t>&#160;&#160;&#160;&#160;访问路径</w:t>
+                                <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;访问路径</w:t>
                             </w:r>
                             <w:r>
                                 <w:rPr>
@@ -3646,31 +3166,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>&#160;&#160;&#160;&#160;服务使用</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>HTTP</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>协议，</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>通过华为封装Spring Cloud</w:t>
-                        </w:r>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>Feign进行服务注册发现。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;${service.use}</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="26C8C523" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -3678,7 +3174,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>&#160;&#160;&#160;&#160;提供${service.title}</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;提供${service.title}</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="08BA31EC" w14:textId="77777777" w:rsidR="007F7763" w:rsidRDefault="007F7763" w:rsidP="007F7763">
@@ -3705,7 +3201,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <!--这里遍历contoller 方法 method 注释 以及 请求方式,请求参数,返回结果,异常 start-->
@@ -3749,7 +3245,7 @@
                                     <w:rPr>
                                         <w:rFonts w:hint="eastAsia"/>
                                     </w:rPr>
-                                    <w:t>&#160;&#160;&#160;&#160;${method.methodRemark}接口。</w:t>
+                                    <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;${method.methodRemark}接口。</w:t>
                                 </w:r>
                             </w:p>
                             <w:p w14:paraId="55B3A902" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4289,7 +3785,7 @@
                                         <w:rPr>
                                             <w:rFonts w:hint="eastAsia"/>
                                         </w:rPr>
-                                        <w:t>无。</w:t>
+                                        <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                                     </w:r>
                                 </w:p>
                             </#if>
@@ -4308,6 +3804,8 @@
                                     <w:t>返回结果</w:t>
                                 </w:r>
                             </w:p>
+                            <!--返回结果大于0渲染表格-->
+                            <#if method.responseResult?size gt 0>
                             <w:p w14:paraId="4DF7A896" w14:textId="77777777" w:rsidR="001D7220" w:rsidRDefault="00E828E6" w:rsidP="001D7220">
                                 <w:pPr>
                                     <w:jc w:val="center"/>
@@ -4570,6 +4068,16 @@
                                 </#list>
                                 <!--返回结果表格遍历 end-->
                             </w:tbl>
+                            <#else>
+                                <w:p w14:paraId="2768EF32" w14:textId="77777777" w:rsidR="008E17BA" w:rsidRDefault="00000000">
+                                    <w:r>
+                                        <w:rPr>
+                                            <w:rFonts w:hint="eastAsia"/>
+                                        </w:rPr>
+                                        <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
+                                    </w:r>
+                                </w:p>
+                            </#if>
                             <w:p w14:paraId="0E30AF4E" w14:textId="77777777" w:rsidR="001D7220" w:rsidRDefault="001D7220"/>
                             <w:p w14:paraId="7CC208A4" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
                                 <w:pPr>
@@ -4769,58 +4277,6 @@
                                         </w:p>
                                     </w:tc>
                                 </w:tr>
-                                <w:tr w:rsidR="00CD27AF" w14:paraId="7F079F86" w14:textId="77777777">
-                                    <w:trPr>
-                                        <w:jc w:val="center"/>
-                                    </w:trPr>
-                                    <w:tc>
-                                        <w:tcPr>
-                                            <w:tcW w:w="2220" w:type="dxa"/>
-                                            <w:vAlign w:val="bottom"/>
-                                        </w:tcPr>
-                                        <w:p w14:paraId="0E4B72D1" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
-                                            <w:pPr>
-                                                <w:widowControl/>
-                                                <w:jc w:val="left"/>
-                                                <w:textAlignment w:val="bottom"/>
-                                            </w:pPr>
-                                            <w:r>
-                                                <w:rPr>
-                                                    <w:rFonts w:ascii="等线" w:eastAsia="等线" w:hAnsi="等线" w:cs="等线" w:hint="eastAsia"/>
-                                                    <w:color w:val="000000"/>
-                                                    <w:sz w:val="22"/>
-                                                    <w:lang w:bidi="ar"/>
-                                                </w:rPr>
-                                                <w:t>P_B02_003206</w:t>
-                                            </w:r>
-                                        </w:p>
-                                    </w:tc>
-                                    <w:tc>
-                                        <w:tcPr>
-                                            <w:tcW w:w="6252" w:type="dxa"/>
-                                            <w:vAlign w:val="bottom"/>
-                                        </w:tcPr>
-                                        <w:p w14:paraId="7F807B50" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
-                                            <w:pPr>
-                                                <w:widowControl/>
-                                                <w:jc w:val="left"/>
-                                                <w:textAlignment w:val="bottom"/>
-                                                <w:rPr>
-                                                    <w:szCs w:val="21"/>
-                                                </w:rPr>
-                                            </w:pPr>
-                                            <w:r>
-                                                <w:rPr>
-                                                    <w:rFonts w:ascii="等线" w:eastAsia="等线" w:hAnsi="等线" w:cs="等线" w:hint="eastAsia"/>
-                                                    <w:color w:val="000000"/>
-                                                    <w:sz w:val="22"/>
-                                                    <w:lang w:bidi="ar"/>
-                                                </w:rPr>
-                                                <w:t>账号已锁定</w:t>
-                                            </w:r>
-                                        </w:p>
-                                    </w:tc>
-                                </w:tr>
                             </w:tbl>
                             <w:p w14:paraId="627FD46F" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00CD27AF"/>
                             <w:p w14:paraId="5D0590CC" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4853,7 +4309,7 @@
                                     <w:rPr>
                                         <w:rFonts w:hint="eastAsia"/>
                                     </w:rPr>
-                                    <w:t>&#160;&#160;&#160;&#160;${method.methodRemark}。</w:t>
+                                    <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;${method.methodRemark}。</w:t>
                                 </w:r>
                             </w:p>
                         </#list>
@@ -4879,7 +4335,7 @@
                                 <w:sz w:val="20"/>
                                 <w:szCs w:val="20"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="44FC8AE3" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4906,7 +4362,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="7FB6BF1A" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -4929,7 +4385,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="25AEAF81" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -5057,255 +4513,6 @@
                         <w:bookmarkEnd w:id="97"/>
                         <w:bookmarkEnd w:id="98"/>
                     </w:p>
-                    <w:p w14:paraId="3B9079CF" w14:textId="3C3D370A" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="3FCBB1D8" w14:textId="170F353C" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
-                        <w:pPr>
-                            <w:pStyle w:val="2"/>
-                            <w:numPr>
-                                <w:ilvl w:val="1"/>
-                                <w:numId w:val="67"/>
-                            </w:numPr>
-                            <w:rPr>
-                                <w:rFonts w:eastAsia="等线" w:cs="Arial"/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:bookmarkStart w:id="99" w:name="_Toc112940466"/>
-                        <w:bookmarkStart w:id="100" w:name="_Toc168057688"/>
-                        <w:bookmarkStart w:id="101" w:name="_Toc169179801"/>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:eastAsia="等线" w:cs="Arial"/>
-                            </w:rPr>
-                            <w:t>全局数据权限处理逻辑</w:t>
-                        </w:r>
-                        <w:bookmarkEnd w:id="99"/>
-                        <w:bookmarkEnd w:id="100"/>
-                        <w:bookmarkEnd w:id="101"/>
-                    </w:p>
-                    <w:p w14:paraId="0CA05E77" w14:textId="4BA1E5B8" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="70D37DEB" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
-                        <w:pPr>
-                            <w:pStyle w:val="2"/>
-                            <w:numPr>
-                                <w:ilvl w:val="1"/>
-                                <w:numId w:val="67"/>
-                            </w:numPr>
-                        </w:pPr>
-                        <w:bookmarkStart w:id="102" w:name="_Toc12016"/>
-                        <w:bookmarkStart w:id="103" w:name="_Toc168057690"/>
-                        <w:bookmarkStart w:id="104" w:name="_Toc169179802"/>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>数据清理以及归档</w:t>
-                        </w:r>
-                        <w:bookmarkEnd w:id="102"/>
-                        <w:bookmarkEnd w:id="103"/>
-                        <w:bookmarkEnd w:id="104"/>
-                    </w:p>
-                    <w:p w14:paraId="6F7FCD4B" w14:textId="350D0C14" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="20047AB4" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
-                        <w:pPr>
-                            <w:pStyle w:val="2"/>
-                            <w:numPr>
-                                <w:ilvl w:val="1"/>
-                                <w:numId w:val="67"/>
-                            </w:numPr>
-                        </w:pPr>
-                        <w:bookmarkStart w:id="105" w:name="_Toc168057691"/>
-                        <w:bookmarkStart w:id="106" w:name="_Toc169179803"/>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>数据安全</w:t>
-                        </w:r>
-                        <w:bookmarkEnd w:id="105"/>
-                        <w:bookmarkEnd w:id="106"/>
-                    </w:p>
-                    <w:p w14:paraId="649FD0CD" w14:textId="5BA26181" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="188D2D61" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
-                        <w:pPr>
-                            <w:pStyle w:val="2"/>
-                            <w:numPr>
-                                <w:ilvl w:val="1"/>
-                                <w:numId w:val="67"/>
-                            </w:numPr>
-                        </w:pPr>
-                        <w:bookmarkStart w:id="107" w:name="_Toc168057692"/>
-                        <w:bookmarkStart w:id="108" w:name="_Toc169179804"/>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>缓存容量</w:t>
-                        </w:r>
-                        <w:bookmarkEnd w:id="107"/>
-                        <w:bookmarkEnd w:id="108"/>
-                    </w:p>
-                    <w:p w14:paraId="13A291A4" w14:textId="7EB57B3A" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="44046B5C" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
-                        <w:pPr>
-                            <w:pStyle w:val="2"/>
-                            <w:numPr>
-                                <w:ilvl w:val="1"/>
-                                <w:numId w:val="67"/>
-                            </w:numPr>
-                        </w:pPr>
-                        <w:bookmarkStart w:id="109" w:name="_Toc24318"/>
-                        <w:bookmarkStart w:id="110" w:name="_Toc108959792"/>
-                        <w:bookmarkStart w:id="111" w:name="_Toc168057693"/>
-                        <w:bookmarkStart w:id="112" w:name="_Toc169179805"/>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>码值</w:t>
-                        </w:r>
-                        <w:bookmarkEnd w:id="109"/>
-                        <w:bookmarkEnd w:id="110"/>
-                        <w:bookmarkEnd w:id="111"/>
-                        <w:bookmarkEnd w:id="112"/>
-                    </w:p>
-                    <w:p w14:paraId="4C5921C8" w14:textId="4D9F9C9F" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="6CAF8000" w14:textId="1B11930A" w:rsidR="00DB0A2A" w:rsidRDefault="00000000" w:rsidP="0034121D">
-                        <w:pPr>
-                            <w:pStyle w:val="2"/>
-                            <w:numPr>
-                                <w:ilvl w:val="1"/>
-                                <w:numId w:val="67"/>
-                            </w:numPr>
-                        </w:pPr>
-                        <w:bookmarkStart w:id="113" w:name="_Toc6211"/>
-                        <w:bookmarkStart w:id="114" w:name="_Toc168057694"/>
-                        <w:bookmarkStart w:id="115" w:name="_Toc169179806"/>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>异常</w:t>
-                        </w:r>
-                        <w:bookmarkEnd w:id="113"/>
-                        <w:bookmarkEnd w:id="114"/>
-                        <w:bookmarkEnd w:id="115"/>
-                    </w:p>
-                    <w:p w14:paraId="4AD6225B" w14:textId="6138C015" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="2272A77E" w14:textId="6F0DDBBE" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
-                        <w:pPr>
-                            <w:pStyle w:val="2"/>
-                            <w:numPr>
-                                <w:ilvl w:val="1"/>
-                                <w:numId w:val="67"/>
-                            </w:numPr>
-                        </w:pPr>
-                        <w:bookmarkStart w:id="116" w:name="_Toc1691"/>
-                        <w:bookmarkStart w:id="117" w:name="_Toc168057695"/>
-                        <w:bookmarkStart w:id="118" w:name="_Toc169179807"/>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>定时任务配置</w:t>
-                        </w:r>
-                        <w:bookmarkEnd w:id="116"/>
-                        <w:bookmarkEnd w:id="117"/>
-                        <w:bookmarkEnd w:id="118"/>
-                    </w:p>
-                    <w:p w14:paraId="5B9DDF67" w14:textId="39C3E95F" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
-                    <w:p w14:paraId="3F9EE172" w14:textId="3D8DE581" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
-                        <w:pPr>
-                            <w:pStyle w:val="2"/>
-                            <w:numPr>
-                                <w:ilvl w:val="1"/>
-                                <w:numId w:val="67"/>
-                            </w:numPr>
-                        </w:pPr>
-                        <w:bookmarkStart w:id="119" w:name="_Toc168057696"/>
-                        <w:bookmarkStart w:id="120" w:name="_Toc169179808"/>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:lastRenderedPageBreak/>
-                            <w:t>线程池设计</w:t>
-                        </w:r>
-                        <w:bookmarkEnd w:id="119"/>
-                        <w:bookmarkEnd w:id="120"/>
-                    </w:p>
-                    <w:p w14:paraId="3A0039E5" w14:textId="36E2D545" w:rsidR="0034121D" w:rsidRPr="0034121D" w:rsidRDefault="0034121D"
-                         w:rsidP="0034121D">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
-                    </w:p>
                     <w:p w14:paraId="4D3B9C11" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
                         <w:pPr>
                             <w:pStyle w:val="1"/>
@@ -5320,14 +4527,6 @@
                         </w:r>
                         <w:bookmarkEnd w:id="121"/>
                         <w:bookmarkEnd w:id="122"/>
-                    </w:p>
-                    <w:p w14:paraId="02DF2739" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:hint="eastAsia"/>
-                            </w:rPr>
-                            <w:t>无。</w:t>
-                        </w:r>
                     </w:p>
                     <w:p w14:paraId="302B4C8C" w14:textId="41B278FE" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
                         <w:pPr>
@@ -5369,7 +4568,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="759D526C" w14:textId="49D19D19" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
@@ -5413,7 +4612,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="77002127" w14:textId="4C2435DD" w:rsidR="00CD27AF" w:rsidRDefault="00000000" w:rsidP="0034121D">
@@ -5438,7 +4637,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <w:p w14:paraId="5D563F51" w14:textId="77777777" w:rsidR="00CD27AF" w:rsidRDefault="00000000">
@@ -5461,7 +4660,7 @@
                             <w:rPr>
                                 <w:rFonts w:hint="eastAsia"/>
                             </w:rPr>
-                            <w:t>无。</w:t>
+                            <w:t>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;无。</w:t>
                         </w:r>
                     </w:p>
                     <w:sectPr w:rsidR="00CD27AF">

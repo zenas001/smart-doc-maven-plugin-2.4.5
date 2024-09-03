@@ -27,6 +27,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HtmlUtil;
 import cn.hutool.http.Method;
+import cn.hutool.json.JSONUtil;
 import com.power.doc.builder.ProjectDocConfigBuilder;
 import com.power.doc.factory.BuildTemplateFactory;
 import com.power.doc.model.ApiDoc;
@@ -79,6 +80,7 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
     @Override
     public void executeMojo(ApiExtendConfig apiConfig, JavaProjectBuilder javaProjectBuilder) throws MojoExecutionException, MojoFailureException {
         ProjectDocConfigBuilder configBuilder = new ProjectDocConfigBuilder(apiConfig, javaProjectBuilder);
+        getLog().debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>controller info:\n" + JSONUtil.toJsonStr(apiConfig.getApiList()));
         //add  ignore field
         IDocBuildTemplate<ApiDoc> docBuildTemplate = BuildTemplateFactory.getDocBuildTemplate("spring");
         List<ApiImport> controllers = ExtendUtils.getTargetApiList(apiConfig);
@@ -102,9 +104,26 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
             filterClassMap.forEach((name, apiImport) -> {
                 if (name.endsWith(ExtendUtils.CLASS_TYPE.CONTROLLER.getApiSuffix())) {
                     //controller
+                    //children
+                    List<ApiImport> childrenList = apiImport.getChildrenList();
+                    JavaClass[] childrenClassArray = new JavaClass[childrenList.size()];
+                    if (CollUtil.isNotEmpty(childrenList)) {
+                        for (int i = 0; i < childrenList.size(); i++) {
+                            String className = childrenList.get(i).getClassName();
+                            getLog().debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>className:" + className);
+                            if (scanClassMap.containsKey(className)) {
+                                JavaClass childrenClass = scanClassMap.get(className);
+                                getLog().debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>find children class:" + childrenClass.getName());
+                                childrenClassArray[i] = childrenClass;
+                                getLog().debug(" >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>childrenClassArray " +
+                                        "class:" + childrenClassArray[i].getName());
+                            }
+                        }
+                    }
+                    getLog().debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>children javaClass:" + Arrays.stream(childrenClassArray).map(JavaClass::getName).collect(Collectors.joining(",")));
                     apiInfoList.addAll(ExtendUtils.getApiInfoList(apiImport,
                             apiDocMap.get(name),
-                            scanClassMap.get(name)));
+                            scanClassMap.get(name), childrenClassArray));
                 } else if (name.endsWith(ExtendUtils.CLASS_TYPE.JOB.getApiSuffix()) || name.endsWith(ExtendUtils.CLASS_TYPE.CONSUMER.getApiSuffix())) {
                     //job and consumer
                     apiInfoList.addAll(ExtendUtils.getApiInfoList(apiImport, scanClassMap.get(name)));
@@ -117,8 +136,7 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
                 throw new MojoExecutionException("apiList is empty!");
             }
             //generate doc  by service name re sort
-            Map<String, Object> dataModel =
-                    toDataModel(apiInfoList.stream().sorted(Comparator.comparing((a) -> a.getApiType().equals(ExtendUtils.CLASS_TYPE.CONTROLLER) || a.getApiType().equals(ExtendUtils.CLASS_TYPE.JOB))).collect(Collectors.toList()));
+            Map<String, Object> dataModel = toDataModel(apiInfoList);
             if (apiConfig.getOutDocBusinessModuleName() != null) {
                 dataModel.put("outDocBusinessModuleName", apiConfig.getOutDocBusinessModuleName());
             }
@@ -180,6 +198,17 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
             serviceInfoList.add(serviceInfo);
         }
         Map<String, Object> dataModel = new HashMap<>();
+        //rsort
+        serviceInfoList =
+                serviceInfoList.stream().sorted(Comparator.comparing((i) -> i, (a, b) -> {
+                            if (a.getTitle().startsWith(ExtendUtils.CLASS_TYPE.CONTROLLER.getTitlePrefix())) {
+                                return -1;
+                            } else if (a.getTitle().equals(b.getTitle())) {
+                                return 0;
+                            }
+                            return 1;
+                        }))
+                        .collect(Collectors.toList());
         dataModel.put("serviceOrderList", serviceInfoList);
         return dataModel;
     }
@@ -196,14 +225,15 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
         //这里module为controller 接口地址
         ApiInfo apiInfo = apiInfos.get(0);
         //替换后缀controller为service
+        ExtendUtils.CLASS_TYPE classType = apiInfo.getApiType();
         String controller = ExtendUtils.CLASS_TYPE.CONTROLLER.getApiSuffix();
-        String service=ExtendUtils.CLASS_TYPE.SERVICE.getApiSuffix();
+        String service = ExtendUtils.CLASS_TYPE.SERVICE.getApiSuffix();
         String serviceName = apiInfo.getServiceName().replace(controller, service);
         String nameSpace = StrUtil.replaceIgnoreCase(apiInfo.getNameSpace(), controller, service.toLowerCase());
         String serviceApi = apiInfo.getServiceApi();
         String accessUrl = StrUtil.isAllNotBlank(serviceApi) ? String.join("/", "https://xxx.xxx", serviceApi) : "无。";
         //命名空间
-        ServiceInfo serviceInfo = new ServiceInfo(key, serviceName, key,
+        ServiceInfo serviceInfo = new ServiceInfo(key, classType.getDesc(), serviceName, key,
                 nameSpace, accessUrl, apiInfo.getServiceApiPrefix(), serviceApi);
         List<ServiceMethod> serviceMethodList = getServiceMethods(apiInfos);
         serviceInfo.setMethodDetails(serviceMethodList);
@@ -288,6 +318,7 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
          * 创建一个ServiceInfo对象，用于存储服务信息。
          *
          * @param title            服务标题
+         * @param use              服务使用
          * @param interfaceName    接口名称
          * @param description      服务描述
          * @param nameSpace        命名空间
@@ -296,10 +327,12 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
          * @param serviceApi       服务API
          */
 
-        public ServiceInfo(String title, String interfaceName, String description, String nameSpace, String accessUrl
+        public ServiceInfo(String title, String use, String interfaceName, String description, String nameSpace,
+                           String accessUrl
                 , String serviceApiPrefix,
                            String serviceApi) {
             this.title = title;
+            this.use = use;
             this.interfaceName = interfaceName;
             this.description = description;
             this.nameSpace = nameSpace;
@@ -310,6 +343,8 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
 
         //标题
         private String title;
+        //服务使用
+        private String use;
         //服务接口名称
         private String interfaceName;
         //服务描述
@@ -331,6 +366,14 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
 
         public void setTitle(String title) {
             this.title = title;
+        }
+
+        public String getUse() {
+            return use;
+        }
+
+        public void setUse(String use) {
+            this.use = use;
         }
 
         public String getInterfaceName() {
@@ -379,6 +422,14 @@ public class WordDocMojo extends BaseDocsGeneratorMojo {
 
         public void setServiceApi(String serviceApi) {
             this.serviceApi = serviceApi;
+        }
+
+        public String getServiceApiPrefix() {
+            return serviceApiPrefix;
+        }
+
+        public void setServiceApiPrefix(String serviceApiPrefix) {
+            this.serviceApiPrefix = serviceApiPrefix;
         }
     }
 

@@ -1,5 +1,8 @@
 package com.smartdoc.extend;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  *
  */
@@ -56,6 +59,13 @@ public class ApiImport {
      * methods list split ","
      */
     private String methods;
+
+
+    /**
+     * children list
+     */
+    private List<ApiImport> childrenList;
+
 
     public String getAuthor() {
         return author;
@@ -135,5 +145,13 @@ public class ApiImport {
 
     public void setModule(String module) {
         this.module = module;
+    }
+
+    public List<ApiImport> getChildrenList() {
+        return childrenList==null? Collections.emptyList():childrenList;
+    }
+
+    public void setChildrenList(List<ApiImport> childrenList) {
+        this.childrenList = childrenList;
     }
 }

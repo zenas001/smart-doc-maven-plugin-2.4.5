@@ -22,15 +22,7 @@ public class ApiExtendConfig extends ApiConfig {
      */
     private List<ApiImport> apiList;
 
-    /************************ out api word doc ****************************/
-
-
-
-    /**
-     * out doc template path
-     **/
-    private String docTemplatePath;
-
+    /************************ out api word doc start****************************/
     /**
      * @deprecated remove
      */
@@ -48,7 +40,7 @@ public class ApiExtendConfig extends ApiConfig {
      * out doc file dir
      */
     private String outDocDir;
-
+    /************************ out api word doc end****************************/
     /**
      * it's out api order doc
      */
@@ -86,15 +78,6 @@ public class ApiExtendConfig extends ApiConfig {
     public String getOutDocBusinessModuleName() {
         return outDocBusinessModuleName;
     }
-
-    public String getDocTemplatePath() {
-        return docTemplatePath;
-    }
-
-    public void setDocTemplatePath(String docTemplatePath) {
-        this.docTemplatePath = docTemplatePath;
-    }
-
     public void setOutDocBusinessModuleName(String outDocBusinessModuleName) {
         this.outDocBusinessModuleName = outDocBusinessModuleName;
     }
